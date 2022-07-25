@@ -1,29 +1,26 @@
-# Blank Solito Example Monorepo 🕴
-
-```sh
-npx create-solito-app@latest my-solito-app
-```
-
-👾 [View the website](https://example.solito.dev)
-
-## ⚡️ Instantly clone & deploy
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fnandorojo%2Fsolito%2Ftree%2Fmaster%2Fexample-monorepos%2Fblank&env=ENABLE_ROOT_PATH_BUILD_CACHE&root-directory=apps/next&envDescription=Set%20this%20environment%20variable%20to%201%20for%20Turborepo%20to%20cache%20your%20node_modules.&envLink=https%3A%2F%2Ftwitter.com%2Fjaredpalmer%2Fstatus%2F1488954563533189124&project-name=solito-app&repo-name=solito-app&demo-title=Solito%20App%20%E2%9A%A1%EF%B8%8F&demo-description=React%20Native%20%2B%20Next.js%20starter%20with%20Solito.%20Made%20by%20Fernando%20Rojo.&demo-url=https%3A%2F%2Fsolito.dev%2Fstarter&demo-image=https%3A%2F%2Fsolito.dev%2Fimg%2Fog.png)
+# PENTS Stack
 
 ## 🔦 About
 
-This monorepo is a blank(ish) starter for an Expo + Next.js app.
+A monorepo with Prisma, Next.js, Expo, tRPC and Solito setup and configured to work together.
+With this setup you can build a fullstack application with backend, frontend and mobile sharing 99% of the code, with full support for SSR and file structure navigation on nextjs, and full support for react native navigation on expo.
 
-While it's pretty barebones, it does a lot of the annoying config for you. The folder structure is opinionated, based on my long experience building for this stack.
+## ？Why
+
+I created this project for a personal need, I wanted something like the create-t3-app, but sharing code between the mobile app and the nextjs app. I could not get any of the available repos on github to work the way I wanted, so I decided to try and put a few of them together and after a few days of banging my head against the wall I finally managed to do it in a good way. There are still a few things I want to do, like ship a auth system and switch to tailwind, but this will take a few more days.
 
 ## 📦 Included packages
 
+- `Prisma`
 - `solito` for cross-platform navigation
-- `moti` for animations
-- `dripsy` for theming/design (you can bring your own, too)
-- Expo SDK 44
-- Next.js 12
-- React Navigation 6
+- `moti` for animations (basically framer-motion but works in both expo and web)
+- `dripsy` for theming/design (you can bring your own, too) (@todo: change to tailwind)
+- `Expo` SDK 44
+- `Next.js` 12
+- `tRPC` 9
+- `React Navigation` 6
+
+- Future: I would like to add nextauth if I figure out a way to do it
 
 ## 🗂 Folder layout
 
@@ -37,6 +34,9 @@ While it's pretty barebones, it does a lot of the annoying config for you. The f
     - `features` (don't use a `screens` folder. organize by feature.)
     - `provider` (all the providers that wrap the app, and some no-ops for Web.)
     - `navigation` Next.js has a `pages/` folder. React Native doesn't. This folder contains navigation-related code for RN. You may use it for any navigation code, such as custom links.
+  - `api` your trpc api with your routes
+  - `db` your prisma db with a pre-populated sqlite file
+  - `config` your environment configs
 
 You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
 
@@ -44,10 +44,9 @@ You can add other folders inside of `packages/` if you know what you're doing an
 
 - Install dependencies: `yarn`
 
-- Next.js local dev: `yarn web`
-  - Runs `yarn next`
-- Expo local dev: `yarn native`
-  - Runs `expo start`
+- Run `yarn dev` for local development
+- It will run prisma studio ([localhost:5555](localhost:5555)), expo (open in iOS simulator by default) and nextjs ([localhost:3000](localhost:3000))
+- You can access the nextjs app at: `localhost:4000`
 
 ## 🆕 Add new dependencies
 
@@ -76,13 +75,10 @@ yarn
 
 You can also install the native library inside of `packages/app` if you want to get autoimport for that package inside of the `app` folder. However, you need to be careful and install the _exact_ same version in both packages. If the versions mismatch at all, you'll potentially get terrible bugs. This is a classic monorepo issue. I use `lerna-update-wizard` to help with this (you don't need to use Lerna to use that lib).
 
-## 🎙 About the creator
+## 🎙 Credits
 
-Follow Fernando Rojo on Twitter: [@FernandoTheRojo](https://twitter.com/fernandotherojo)
+This setup is heavily inspired on a few projects:
 
-## 🧐 Why use Expo + Next.js?
-
-See my talk about this topic at Next.js Conf 2021:
-
-<a href="https://www.youtube.com/watch?v=0lnbdRweJtA"><img width="1332" alt="image" src="https://user-images.githubusercontent.com/13172299/157299915-b633e083-f271-48c6-a262-7b7eef765be5.png">
-</a>
+- [create-t3-app](https://github.com/t3-oss/create-t3-app)
+- [create-solito-app](https://github.com/nandorojo/solito/tree/master/example-monorepos/blank)
+- [zART-Stack](https://github.com/trpc/zart)
