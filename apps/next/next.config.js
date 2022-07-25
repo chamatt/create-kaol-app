@@ -14,6 +14,8 @@ const withTM = require('next-transpile-modules')([
   '@motify/core',
   '@motify/components',
   'app',
+  'api',
+  'config',
 ])
 
 module.exports = withPlugins(

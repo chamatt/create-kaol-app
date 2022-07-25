@@ -1,0 +1,14 @@
+{
+  "name": "config",
+  "version": "0.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "eslint/*",
+    "tsconfig/*"
+  ],
+  "dependencies": {
+    "eslint-config-next": "^12.0.7",
+    "eslint-config-prettier": "^8.3.0"
+  }
+}

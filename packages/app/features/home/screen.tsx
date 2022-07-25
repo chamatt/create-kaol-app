@@ -1,9 +1,12 @@
+import { trpc } from 'app/utils/trpc'
 import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 
 export function HomeScreen() {
   const sx = useSx()
+
+  const { data: posts, isLoading } = trpc.useQuery(['post.get-all'])
 
   return (
     <View
@@ -33,39 +36,48 @@ export function HomeScreen() {
         </P>
       </View>
       <View sx={{ height: 32 }} />
-      <Row>
-        <TextLink
-          href="/user/fernando"
-          textProps={{
-            style: sx({ fontSize: 16, fontWeight: 'bold', color: 'blue' }),
+      {posts?.map((post) => (
+        <View
+          key={post.id}
+          sx={{
+            borderWidth: 1,
+            borderStyle: 'solid',
+            padding: 20,
+            marginBottom: 10,
           }}
         >
-          Regular Link
-        </TextLink>
-        <View sx={{ width: 32 }} />
-        <MotiLink
-          href="/user/fernando"
-          animate={({ hovered, pressed }) => {
-            'worklet'
-
-            return {
-              scale: pressed ? 0.95 : hovered ? 1.1 : 1,
-              rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg',
-            }
-          }}
-          transition={{
-            type: 'timing',
-            duration: 150,
-          }}
-        >
-          <Text
-            selectable={false}
-            sx={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}
+          <TextLink
+            href={`/post/${post.id}`}
+            textProps={{
+              style: sx({ fontSize: 16, fontWeight: 'bold', color: 'blue' }),
+            }}
           >
-            Moti Link
-          </Text>
-        </MotiLink>
-      </Row>
+            Regular Link: {post.title}
+          </TextLink>
+          <MotiLink
+            href={`/post/${post.id}`}
+            animate={({ hovered, pressed }) => {
+              'worklet'
+
+              return {
+                scale: pressed ? 0.95 : hovered ? 1.1 : 1,
+                rotateZ: pressed ? '0deg' : hovered ? '-3deg' : '0deg',
+              }
+            }}
+            transition={{
+              type: 'timing',
+              duration: 150,
+            }}
+          >
+            <Text
+              selectable={false}
+              sx={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}
+            >
+              Moti Link: {post.title}
+            </Text>
+          </MotiLink>
+        </View>
+      ))}
     </View>
   )
 }

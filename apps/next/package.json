@@ -11,6 +11,8 @@
   "dependencies": {
     "@expo/next-adapter": "^3.1.20",
     "app": "*",
+    "config": "*",
+    "api": "*",
     "next": "12.1.0",
     "raf": "^3.4.1"
   },

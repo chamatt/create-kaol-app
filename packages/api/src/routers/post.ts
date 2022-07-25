@@ -1,17 +1,17 @@
-import { createRouter } from "./context";
-import { z } from "zod";
+import { createRouter } from './context'
+import { z } from 'zod'
 
 export const postRouter = createRouter()
-  .query("get-all", {
+  .query('get-all', {
     async resolve({ ctx }) {
       return await ctx.prisma.post.findMany({
         include: {
           author: true,
         },
-      });
+      })
     },
   })
-  .query("get-by-id", {
+  .query('get-by-id', {
     input: z.object({
       id: z.string().uuid(),
     }),
@@ -20,22 +20,16 @@ export const postRouter = createRouter()
         where: {
           id: input.id,
         },
-      });
-    },
-  })
-  .query("get-by-author-id", {
-    input: z.object({
-      authorId: z.string(),
-    }),
-    async resolve({ input, ctx }) {
-      return await ctx.prisma.post.findMany({
-        where: {
-          authorId: input.authorId,
+        include: {
+          author: true,
         },
-      });
+        orderBy: {
+          title: 'asc',
+        },
+      })
     },
   })
-  .mutation("create", {
+  .mutation('create', {
     input: z.object({
       authorId: z.string(),
       title: z.string(),
@@ -48,10 +42,10 @@ export const postRouter = createRouter()
           title: input.title,
           content: input.content,
         },
-      });
+      })
     },
   })
-  .mutation("delete", {
+  .mutation('delete', {
     input: z.object({
       id: z.string().uuid(),
     }),
@@ -60,6 +54,6 @@ export const postRouter = createRouter()
         where: {
           id: input.id,
         },
-      });
+      })
     },
-  });
+  })
