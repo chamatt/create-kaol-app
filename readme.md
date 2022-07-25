@@ -1,4 +1,4 @@
-# PENTS Stack
+# Kaol Stack
 
 ## 🔦 About
 
