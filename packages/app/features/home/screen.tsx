@@ -1,18 +1,18 @@
 import { trpc } from 'app/utils/trpc'
-import { Text, useSx, View, H1, P, Row, A } from 'dripsy'
+import tw, { styled } from '../../utils/tw'
+import { Text, View, H1, P, A, useSx } from 'dripsy'
+import { View as RNView } from 'react-native'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 
-export function HomeScreen() {
-  const sx = useSx()
+const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
 
-  const { data: posts, isLoading } = trpc.useQuery(['post.get-all'])
+export function HomeScreen() {
+  const { data: posts } = trpc.useQuery(['post.get-all'])
 
   return (
-    <View
-      sx={{ flex: 1, justifyContent: 'center', alignItems: 'center', p: 16 }}
-    >
-      <H1 sx={{ fontWeight: '800' }}>Welcome to Solito.</H1>
+    <View style={tw`flex-1 justify-center items-center p-4`}>
+      <H1 style={tw`font-extrabold text-3xl`}>Welcome to Kaol.</H1>
       <View sx={{ maxWidth: 600 }}>
         <P sx={{ textAlign: 'center' }}>
           Here is a basic starter to show you how you can navigate from one
@@ -20,9 +20,9 @@ export function HomeScreen() {
           Native.
         </P>
         <P sx={{ textAlign: 'center' }}>
-          Solito is made by{' '}
+          Kaol is made by{' '}
           <A
-            href="https://twitter.com/fernandotherojo"
+            href="https://github.com/chamatt"
             // @ts-expect-error react-native-web only types
             hrefAttrs={{
               target: '_blank',
@@ -30,26 +30,18 @@ export function HomeScreen() {
             }}
             sx={{ color: 'blue' }}
           >
-            Fernando Rojo
+            @chamatt
           </A>
           .
         </P>
       </View>
       <View sx={{ height: 32 }} />
       {posts?.map((post) => (
-        <View
-          key={post.id}
-          sx={{
-            borderWidth: 1,
-            borderStyle: 'solid',
-            padding: 20,
-            marginBottom: 10,
-          }}
-        >
+        <Card key={post.id}>
           <TextLink
             href={`/post/${post.id}`}
             textProps={{
-              style: sx({ fontSize: 16, fontWeight: 'bold', color: 'blue' }),
+              style: tw`text-md font-bold text-blue-700 mb-2`,
             }}
           >
             Regular Link: {post.title}
@@ -69,14 +61,11 @@ export function HomeScreen() {
               duration: 150,
             }}
           >
-            <Text
-              selectable={false}
-              sx={{ fontSize: 16, color: 'black', fontWeight: 'bold' }}
-            >
+            <Text selectable={false} style={tw`text-md text-black font-bold`}>
               Moti Link: {post.title}
             </Text>
           </MotiLink>
-        </View>
+        </Card>
       ))}
     </View>
   )

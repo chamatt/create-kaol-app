@@ -3,18 +3,19 @@
   "name": "app",
   "main": "index.ts",
   "dependencies": {
+    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/native-stack": "^6.5.0",
     "@trpc/client": "^9.15.0",
     "@trpc/next": "^9.15.0",
     "@trpc/react": "^9.15.0",
     "@trpc/server": "^9.15.0",
-    "@react-navigation/native": "^6.0.8",
-    "@react-navigation/native-stack": "^6.5.0",
+    "api": "*",
     "dripsy": "^3.6.0",
     "expo-linking": "^3.0.0",
     "moti": "canary",
-    "solito": "latest",
     "react-query": "^3.34.7",
-    "api": "*"
+    "solito": "latest",
+    "twrnc": "^3.3.3"
   },
   "sideEffects": false
 }

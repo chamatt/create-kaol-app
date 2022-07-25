@@ -13,6 +13,7 @@ const withTM = require('next-transpile-modules')([
   'moti',
   '@motify/core',
   '@motify/components',
+  'twrnc',
   'app',
   'api',
   'config',

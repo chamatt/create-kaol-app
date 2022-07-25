@@ -1,0 +1,10 @@
+{
+  "tailwindCSS.experimental.classRegex": [
+    // match twrnc classNames
+    "tw`([^`]*)",
+    "tw\\.style\\(([^)]*)\\)",
+    // match styled components:  Styled(Component, "")
+    ["styled\\([^,]([^)]*)\\)", "'([^']*)'"],
+    ["styled\\([^,]([^)]*)\\)", "\"([^\"]*)\""]
+  ]
+}
