@@ -5,23 +5,34 @@
     "apps/*",
     "packages/*"
   ],
+  "prisma": {
+    "seed": "ts-node packages/db/seeds/index.ts"
+  },
   "devDependencies": {
+    "@types/node": "^18.6.1",
+    "ts-node": "^10.9.1",
     "@types/react": "^17.0.39",
     "@types/react-native": "^0.67.2",
     "eslint": "^8.11.0",
     "turbo": "^1.1.6",
-    "typescript": "^4.6.2",
+    "typescript": "^4.7.4",
     "prettier": "^2.5.1"
   },
   "scripts": {
+    "dev": "yarn db:up && yarn db:migrate:dev && turbo run dev --parallel",
     "native": "cd apps/expo && expo start",
     "web": "cd apps/next && yarn next",
     "build": "turbo run build",
-    "dev": "turbo run dev --parallel",
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "update-db": "cd packages/db && npm run update",
-    "clean": "find . -name node_modules -o -name .next -o -name .expo -o -name .turbo -type d -prune | xargs rm -rf"
+    "clean": "find . -name node_modules -o -name .next -o -name .expo -o -name .turbo -type d -prune | xargs rm -rf",
+    "db:up": "docker compose up -d",
+    "db:nuke": "docker compose down --volumes --remove-orphans",
+    "db:reset": "yarn db-nuke && yarn db-up && yarn db-migrate-dev",
+    "db:migrate:dev": "yarn prisma migrate dev",
+    "db:update": "yarn prisma db push && yarn prisma generate",
+    "db:seed": "yarn prisma db seed",
+    "postinstall": "yarn prisma generate"
   },
   "engines": {
     "npm": ">=7.0.0",

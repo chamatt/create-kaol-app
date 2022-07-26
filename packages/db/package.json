@@ -5,12 +5,13 @@
     "index.ts"
   ],
   "scripts": {
-    "dev": "prisma studio",
-    "update": "prisma db push && prisma generate",
-    "postinstall": "prisma generate"
+    "dev": "prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^3.14.0",
     "prisma": "^3.14.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.3.0"
   }
 }
