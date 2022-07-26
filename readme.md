@@ -86,7 +86,6 @@ const withTM = require('next-transpile-modules')([
 ])
 ```
 
-
 ## 🎙 Credits
 
 This setup is heavily inspired on a few projects:

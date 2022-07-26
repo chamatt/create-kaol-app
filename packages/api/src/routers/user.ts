@@ -1,13 +1,13 @@
-import { createRouter } from "./context";
-import { z } from "zod";
+import { createRouter } from './context'
+import { z } from 'zod'
 
 export const userRouter = createRouter()
-  .query("get-all", {
+  .query('get-all', {
     async resolve({ ctx }) {
-      return await ctx.prisma.user.findMany();
+      return await ctx.prisma.user.findMany()
     },
   })
-  .query("get-by-id", {
+  .query('get-by-id', {
     input: z.object({
       id: z.string(),
     }),
@@ -16,10 +16,10 @@ export const userRouter = createRouter()
         where: {
           id: input.id,
         },
-      });
+      })
     },
   })
-  .mutation("create", {
+  .mutation('create', {
     input: z.object({
       name: z.string(),
     }),
@@ -28,6 +28,6 @@ export const userRouter = createRouter()
         data: {
           name: input.name,
         },
-      });
+      })
     },
-  });
+  })
