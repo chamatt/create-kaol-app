@@ -1,9 +1,10 @@
 {
   "dependencies": {
-    "config": "*",
-    "app": "*",
     "api": "*",
+    "app": "*",
+    "config": "*",
     "expo": "^44.0.0",
+    "expo-secure-store": "~11.1.0",
     "expo-splash-screen": "~0.14.1",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",

@@ -1,10 +1,9 @@
 import { createRouter } from './context'
-import { userRouter } from './user'
-import { postRouter } from './post'
+import { authRouter } from './routers/auth'
+import { postRouter } from './routers/post'
 
 export const appRouter = createRouter()
-  .merge('user.', userRouter)
+  .merge('auth.', authRouter)
   .merge('post.', postRouter)
 
-// export type definition of API
 export type AppRouter = typeof appRouter

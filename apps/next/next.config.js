@@ -17,6 +17,7 @@ const withTM = require('next-transpile-modules')([
   'app',
   'api',
   'config',
+  'js-cookie',
 ])
 
 module.exports = withPlugins(

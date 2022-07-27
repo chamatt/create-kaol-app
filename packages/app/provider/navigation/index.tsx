@@ -17,6 +17,7 @@ export function NavigationProvider({
             screens: {
               home: '',
               'post-detail': 'post/:id',
+              login: 'auth/login',
             },
           },
         }),

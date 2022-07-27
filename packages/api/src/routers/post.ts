@@ -1,7 +1,7 @@
-import { createRouter } from './context'
+import { createRouter, protectedRoute } from '../context'
 import { z } from 'zod'
 
-export const postRouter = createRouter()
+export const postRouter = protectedRoute
   .query('get-all', {
     async resolve({ ctx }) {
       return await ctx.prisma.post.findMany({

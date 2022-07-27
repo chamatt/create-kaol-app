@@ -4,15 +4,28 @@ import { Text, View, H1, P, A, useSx } from 'dripsy'
 import { View as RNView } from 'react-native'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
+import { useAuth } from 'app/provider/auth'
 
 const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
 
 export function HomeScreen() {
   const { data: posts } = trpc.useQuery(['post.get-all'])
+  const { user } = useAuth()
 
   return (
     <View style={tw`flex-1 justify-center items-center p-4`}>
-      <H1 style={tw`font-extrabold text-3xl`}>Welcome to Kaol.</H1>
+      <TextLink
+        href="/auth/login"
+        textProps={{
+          style: tw`text-md font-bold text-blue-700 mb-2`,
+        }}
+      >
+        Login
+      </TextLink>
+      <H1 style={tw`font-extrabold text-3xl`}>
+        Welcome to Kaol. {user?.email}
+      </H1>
+
       <View sx={{ maxWidth: 600 }}>
         <P sx={{ textAlign: 'center' }}>
           Here is a basic starter to show you how you can navigate from one

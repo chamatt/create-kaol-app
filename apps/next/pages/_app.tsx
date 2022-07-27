@@ -3,10 +3,21 @@ import Head from 'next/head'
 import React from 'react'
 import type { SolitoAppProps } from 'solito'
 import { withTRPC } from '@trpc/next'
-import type { AppRouter } from 'api/src/routers'
+import type { AppRouter } from 'api/src/index'
 import 'raf/polyfill'
+import { NextPage, NextPageContext } from 'next'
+// import { GetI } from 'next'
+import serverCookies from 'cookies'
+import clientCookies from 'js-cookie'
 
-function MyApp({ Component, pageProps }: SolitoAppProps) {
+export const getInitialProps = async (ctx) => {}
+
+function MyApp({
+  Component,
+  pageProps: { sessionToken, ...pageProps },
+}: SolitoAppProps) {
+  console.log('pageProps', pageProps)
+  console.log('server session', sessionToken)
   return (
     <>
       <Head>
@@ -17,11 +28,33 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Provider>
-        <Component {...pageProps} />
+      <Provider sessionTokenServer="">
+        <Component {...pageProps} s />
       </Provider>
     </>
   )
+}
+
+MyApp.getInitialProps = async ({ req, res }: NextPageContext) => {
+  // const { req } = ctx
+  let sessionToken = ''
+  const isServer = !!req
+  console.log('é do server', isServer)
+  if (isServer) {
+    const cookies = new serverCookies(req, res)
+    console.log('server cookies', cookies)
+    sessionToken = cookies.get('sessionToken')
+  } else {
+    sessionToken = clientCookies.get('sessionToken')
+  }
+  console.log('header', clientCookies, req?.headers)
+
+  console.log('getInitialProps sessionToken:', sessionToken)
+  return {
+    props: {
+      sessionToken,
+    },
+  }
 }
 
 const getBaseUrl = () => {
@@ -42,8 +75,29 @@ export default withTRPC<AppRouter>({
      */
     const url = `${getBaseUrl()}/api/trpc`
 
+    // const sessionToken
+    console.log('caralho')
+    // console.log('nextjs pica', ctx?.req?.headers)
+    const getSessionAuth = () => {
+      let sessionToken = ''
+      if (ctx?.req) {
+        const cookies = new serverCookies(ctx.req, ctx.res)
+        sessionToken = cookies.get('sessionToken')
+      } else {
+        sessionToken = clientCookies.get('sessionToken')
+      }
+      if (!sessionToken) return undefined
+      return {
+        authorization: sessionToken ? `bearer ${sessionToken}` : undefined,
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      }
+    }
+
+    console.log('getSessionAuth', getSessionAuth())
     return {
       url,
+
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
@@ -54,9 +108,12 @@ export default withTRPC<AppRouter>({
           return {
             ...ctx.req.headers,
             'x-ssr': '1',
+            ...getSessionAuth(),
           }
         }
-        return {}
+        return {
+          ...getSessionAuth(),
+        }
       },
     }
   },
