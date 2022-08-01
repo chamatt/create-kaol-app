@@ -1,4 +1,5 @@
-import { AuthProvider } from './auth'
+import { APIProvider } from './api/api'
+import { AuthProvider } from './auth/AuthProvider'
 import { Dripsy } from './dripsy'
 import { NavigationProvider } from './navigation'
 
@@ -10,10 +11,12 @@ export function Provider({
   sessionTokenServer?: string
 }) {
   return (
-    <AuthProvider sessionTokenServer={sessionTokenServer}>
-      <NavigationProvider>
-        <Dripsy>{children}</Dripsy>
-      </NavigationProvider>
-    </AuthProvider>
+    <APIProvider>
+      <AuthProvider sessionTokenServer={sessionTokenServer}>
+        <NavigationProvider>
+          <Dripsy>{children}</Dripsy>
+        </NavigationProvider>
+      </AuthProvider>
+    </APIProvider>
   )
 }

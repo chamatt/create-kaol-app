@@ -21,6 +21,8 @@
     "raf": "^3.4.1"
   },
   "devDependencies": {
+    "@types/cookies": "^0.7.7",
+    "@types/js-cookie": "^3.0.2",
     "@types/node": "17.0.21",
     "eslint-config-next": "^12.1.0",
     "next-compose-plugins": "^2.2.1",

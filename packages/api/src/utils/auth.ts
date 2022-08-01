@@ -11,7 +11,6 @@ export const getUserFromHeader = async (
   if (authHeader) {
     try {
       const user = await verifyJWTToken(authHeader.split(' ')[1] as string)
-      console.log({ user })
       return user
     } catch (err) {
       return null

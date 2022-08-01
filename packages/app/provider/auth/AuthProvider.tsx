@@ -1,16 +1,18 @@
-import { inferQueryOutput } from 'api/src/inferance-helpers'
 import { trpc } from 'app/utils/trpc'
-import React, { createContext, useContext, useEffect, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'solito/router'
 import sessionStorage from '../../utils/sessionStorage'
-
-interface AuthInterface {
-  logout: () => void
-  authenticate: (token: string) => void
-  user: inferQueryOutput<'auth.me'>
-  isAuthenticated: boolean
-}
+import { AuthInterface } from './types'
+import jwtDecode from 'jwt-decode'
+import Cookies from 'js-cookie'
+import { Platform } from 'react-native'
 
 const AuthContext = createContext({} as AuthInterface)
 
@@ -22,24 +24,22 @@ export const AuthProvider = ({
   sessionTokenServer?: string
 }) => {
   const [sessionToken, setSessionToken] = useState<string>(sessionTokenServer)
-  console.warn('sessionToken', sessionToken)
   const queryClient = useQueryClient()
-  const {
-    data: user,
-    refetch,
-    status,
-  } = trpc.useQuery(['auth.me'], {
+  const decodedToken = useMemo(() => {
+    if (sessionToken) {
+      return jwtDecode(sessionToken) as AuthInterface['decodedToken']
+    }
+  }, [sessionToken])
+
+  const { data: user } = trpc.useQuery(['auth.me'], {
     enabled: !!sessionToken,
+    retry: false,
   })
   const router = useRouter()
 
-  console.log({ status })
-  //   On init check cookies and set token
   useEffect(() => {
     async function init() {
       const sessionTokenInTheCookies = await sessionStorage.get('sessionToken')
-
-      console.log('init', sessionTokenInTheCookies)
       if (
         sessionTokenInTheCookies &&
         sessionTokenInTheCookies !== sessionToken
@@ -52,8 +52,10 @@ export const AuthProvider = ({
 
   const logout = async () => {
     await sessionStorage.remove('sessionToken')
+
     setSessionToken('')
-    queryClient.resetQueries(['auth/me/'])
+    queryClient.resetQueries(['auth.me'])
+    router.push('/')
   }
 
   const authenticate = async (token: string) => {
@@ -62,13 +64,24 @@ export const AuthProvider = ({
     router.push('/')
   }
 
+  const loginMutation = trpc.useMutation('auth.login')
+  const signIn = async (email: string, password: string) => {
+    const { token } = await loginMutation.mutateAsync({
+      email,
+      password,
+    })
+    authenticate(token)
+  }
+
   return (
     <AuthContext.Provider
       value={{
-        user: user ?? null,
-        isAuthenticated: !!user,
+        decodedToken,
+        user: (decodedToken && user) ?? null,
+        isAuthenticated: !!decodedToken,
         logout,
-        authenticate,
+        signIn,
+        signInLoading: loginMutation.isLoading,
       }}
     >
       {children}

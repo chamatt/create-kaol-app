@@ -2,6 +2,7 @@ import { trpc } from 'app/utils/trpc'
 import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Constants from 'expo-constants'
+import sessionStorage from '../../utils/sessionStorage'
 
 const { manifest } = Constants
 const localhost = `http://${manifest?.debuggerHost?.split(':').shift()}:4000`

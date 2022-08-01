@@ -4,13 +4,11 @@ console.log('LOADED WEB APP')
 
 const WebStorage: Storage = {
   get: async (key: string) => {
-    return Cookies.get(key)
+    return (await Cookies.get(key)) || null
   },
-
   set: async (key: string, value: string) => {
     Cookies.set(key, value)
   },
-
   remove: async (key: string) => {
     Cookies.remove(key)
   },

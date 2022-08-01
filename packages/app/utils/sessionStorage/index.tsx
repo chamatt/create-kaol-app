@@ -1,6 +1,6 @@
 import { Storage } from './types'
 import * as SecureStore from 'expo-secure-store'
-console.log('LOADED MOBILE APP')
+console.warn('LOADED MOBILE APP')
 
 const MobileStore: Storage = {
   get: async (key: string) => {
