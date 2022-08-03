@@ -1,9 +1,8 @@
 import { trpc } from 'app/utils/trpc'
-import tw, { styled } from '../../design-system/tailwind'
-import { Text, View } from 'dripsy'
-import { View as RNView } from 'react-native'
+import { View, Text } from 'universal'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
+import { styled, tw } from 'universal/tailwind'
 
 const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
 
@@ -11,7 +10,7 @@ export function PostListScreen() {
   const { data: posts } = trpc.useQuery(['post.get-all'])
 
   return (
-    <RNView style={tw`flex-1 justify-center items-center p-4`}>
+    <View tw="flex-1 justify-center items-center p-4">
       {posts?.map((post) => (
         <Card key={post.id}>
           <TextLink
@@ -37,12 +36,12 @@ export function PostListScreen() {
               duration: 150,
             }}
           >
-            <Text selectable={false} style={tw`text-md text-black font-bold`}>
+            <Text selectable={false} tw="text-md text-black font-bold">
               Moti Link: {post.title}
             </Text>
           </MotiLink>
         </Card>
       ))}
-    </RNView>
+    </View>
   )
 }

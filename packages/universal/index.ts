@@ -1,8 +1,8 @@
-export { View } from 'app/design-system/view'
+export { View } from './view'
 
 // export { ScrollView } from 'app/design-system/scroll-view'
 
-export { Text } from 'app/design-system/text'
+export { Text } from './text'
 
 // export { TextInput } from 'app/design-system/text-input'
 

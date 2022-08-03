@@ -1,9 +1,9 @@
 import { StyleProp } from 'react-native'
 import { create, TwConfig } from 'twrnc'
 import { ClassInput } from 'twrnc/dist/esm/types'
-import config from '../tailwind.config.js'
+import config from './tailwind.config.js'
 
-const tw = create(config as TwConfig)
+export const tw = create(config as TwConfig)
 
 type StyledTailwind = {
   className?: string
@@ -46,9 +46,3 @@ export function styled<P>(
   ComponentWithStyle.displayName = `styled(${WrappedComponent.displayName})`
   return ComponentWithStyle
 }
-
-export type WithTWProp<P> = P & {
-  tw?: string
-}
-
-export default tw

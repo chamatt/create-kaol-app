@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
 import { View as DripsyView } from 'dripsy'
-import tailwind, { WithTWProp } from 'app/design-system/tailwind'
+import { tw as tailwind, WithTWProp } from 'universal/tailwind'
 
 type ViewProps = WithTWProp<ComponentProps<typeof DripsyView>>
 

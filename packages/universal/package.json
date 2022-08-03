@@ -1,0 +1,11 @@
+{
+  "version": "0.0.0",
+  "name": "universal",
+  "main": "index.ts",
+  "dependencies": {
+    "@capsizecss/core": "^3.0.0",
+    "dripsy": "^3.6.0",
+    "twrnc": "^3.3.3"
+  },
+  "sideEffects": false
+}

@@ -1,9 +1,9 @@
 import { trpc } from 'app/utils/trpc'
-import tw, { styled } from 'app/design-system/tailwind'
 import { View, Text } from 'dripsy'
 import { createParam } from 'solito'
 import { TextLink } from 'solito/link'
 import { NavigationPaths } from 'app/navigation/native'
+import { styled, tw } from 'universal/tailwind'
 
 const { useParam } = createParam<{ id: string }>()
 

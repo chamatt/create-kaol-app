@@ -3,6 +3,8 @@
     "api": "*",
     "app": "*",
     "config": "*",
+    "lib": "*",
+    "universal": "*",
     "expo": "^44.0.0",
     "expo-secure-store": "~11.1.0",
     "expo-splash-screen": "~0.14.1",

@@ -1,5 +1,6 @@
-import tw from 'app/design-system/tailwind'
-import { Text, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { Text } from 'universal'
+import { tw } from 'universal/tailwind'
 
 type ButtonProps = {
   children: React.ReactNode

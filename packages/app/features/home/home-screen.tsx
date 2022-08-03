@@ -1,13 +1,10 @@
-import { trpc } from 'app/utils/trpc'
-import tw, { styled } from '../../design-system/tailwind'
 import { H1, P, A } from 'dripsy'
 import { TextLink } from 'solito/link'
 import { useAuth } from 'app/provider/AuthProvider'
 import { Button } from 'app/components/Button'
-import { View } from 'app/design-system'
+import { View } from 'universal'
 import { NavigationPaths } from 'app/navigation/native'
-
-const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
+import { tw } from 'universal/tailwind'
 
 export function HomeScreen() {
   const { user, logout, isAuthenticated } = useAuth()

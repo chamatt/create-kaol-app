@@ -1,7 +1,7 @@
 import { ComponentProps } from 'react'
-import { Text as DripsyText, H1, Theme } from 'dripsy'
+import { Text as DripsyText, Theme } from 'dripsy'
 
-import tailwind from 'app/design-system/tailwind'
+import { tw as tailwind } from 'universal/tailwind'
 
 type Variant = keyof Theme['text']
 

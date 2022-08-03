@@ -14,11 +14,12 @@ const withTM = require('next-transpile-modules')([
   '@motify/core',
   '@motify/components',
   'twrnc',
+  'js-cookie',
   'app',
   'api',
   'config',
   'lib',
-  'js-cookie',
+  'universal',
 ])
 
 module.exports = withPlugins(
