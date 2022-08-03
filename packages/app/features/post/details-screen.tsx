@@ -1,8 +1,9 @@
 import { trpc } from 'app/utils/trpc'
-import tw, { styled } from 'app/utils/tw'
+import tw, { styled } from 'app/design-system/tailwind'
 import { View, Text } from 'dripsy'
 import { createParam } from 'solito'
 import { TextLink } from 'solito/link'
+import { NavigationPaths } from 'app/navigation/native'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -32,9 +33,9 @@ export function PostDetailScreen() {
       </TextStyled>
       <TextStyled className="mb-4">{data?.content}</TextStyled>
       <TextStyled className="text-gray-600">
-        By: {data?.author?.name}
+        By: {data?.author?.email}
       </TextStyled>
-      <TextLink href="/">👈 Go Home</TextLink>
+      <TextLink href={NavigationPaths.screens.home}>👈 Go Home</TextLink>
     </View>
   )
 }

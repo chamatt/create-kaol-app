@@ -47,25 +47,8 @@ export function styled<P>(
   return ComponentWithStyle
 }
 
-type StyledTailwindSx = {
-  className?: string
-  style?: StyleProp<any>
-}
-
-export function styledSx<P>(
-  WrappedComponent: React.ComponentType<P>,
-  ...inputs: ClassInput[]
-) {
-  const ComponentWithStyle = (props: P & StyledTailwindSx) => {
-    return (
-      <WrappedComponent
-        {...props}
-        sx={[tw.style(...inputs, props.className, ...[].concat(props.style))]}
-      />
-    )
-  }
-  ComponentWithStyle.displayName = `styled(${WrappedComponent.displayName})`
-  return ComponentWithStyle
+export type WithTWProp<P> = P & {
+  tw?: string
 }
 
 export default tw

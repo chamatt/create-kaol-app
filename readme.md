@@ -77,7 +77,7 @@ You can also install the native library inside of `packages/app` if you want to 
 
 ### ‼ IMPORTANT
 
-A lot of libraries aren't transpiled for next by default, so when you add a library make sure to add it to the transpile list in `next.config.js`
+A lot of libraries aren't transpiled for next by default, so when you add a library make sure to add it to the transpile list in `next.config.js`, else they will problably not work.
 
 ```js
 const withTM = require('next-transpile-modules')([

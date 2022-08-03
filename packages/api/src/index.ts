@@ -1,4 +1,4 @@
-import { createRouter } from './context'
+import { createRouter } from './routers/context'
 import { authRouter } from './routers/auth'
 import { postRouter } from './routers/post'
 

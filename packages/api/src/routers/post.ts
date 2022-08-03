@@ -1,4 +1,4 @@
-import { createRouter, protectedRoute } from '../context'
+import { createRouter, protectedRoute } from './context'
 import { z } from 'zod'
 
 export const postRouter = protectedRoute

@@ -1,8 +1,8 @@
-import { inferAsyncReturnType } from '@trpc/server'
+import { inferAsyncReturnType, TRPCError } from '@trpc/server'
 import * as trpcNext from '@trpc/server/adapters/next'
 import * as trpc from '@trpc/server'
 import crypto from 'crypto'
-import { getUserFromHeader } from './utils/auth'
+import { getUserFromHeader } from '../utils/auth'
 import { User } from '.prisma/client'
 import { prismaClient } from 'db'
 
@@ -33,11 +33,12 @@ export const createContext = async ({
 
 export const protectedRoute = createRouter().middleware(
   async ({ ctx, next }) => {
-    console.log('came here', ctx.headers)
     const user = await getUserFromHeader(ctx.headers)
     if (!user) {
-      console.log(`Unauthenticated while accesing ${ctx.req.url}`, ctx.headers)
-      throw new Error(`Unauthenticated when trying to access ${ctx.req.url}`)
+      throw new TRPCError({
+        message: `Unauthenticated when trying to access ${ctx.req.url}`,
+        code: 'UNAUTHORIZED',
+      })
     }
     ctx.user = user
     ctx.isAdmin = isAdmin(user.role)
@@ -49,12 +50,17 @@ export const adminRoute = createRouter().middleware(async ({ ctx, next }) => {
   const user = await getUserFromHeader(ctx.headers)
 
   if (!user) {
-    console.log(`Unauthenticated while accesing ${ctx.req.url}`, ctx.headers)
-    throw new Error(`Unauthenticated when trying to access ${ctx.req.url}`)
+    throw new TRPCError({
+      message: `Unauthenticated when trying to access ${ctx.req.url}`,
+      code: 'UNAUTHORIZED',
+    })
   }
 
   if (!isAdmin(user.role)) {
-    throw new Error('Unauthorized')
+    throw new TRPCError({
+      message: `You don't have access to this admin route: ${ctx.req.url}`,
+      code: 'FORBIDDEN',
+    })
   }
 
   ctx.user = user

@@ -2,7 +2,7 @@ import { trpc } from 'app/utils/trpc'
 import { useState } from 'react'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import Constants from 'expo-constants'
-import sessionStorage from '../../utils/sessionStorage'
+import SafeStorage from 'lib/safe-storage'
 
 const { manifest } = Constants
 const localhost = `http://${manifest?.debuggerHost?.split(':').shift()}:4000`
@@ -11,7 +11,7 @@ const createTrpcClient = () => {
   return trpc.createClient({
     url: process.env.API_URL || `${localhost}/api/trpc`,
     async headers() {
-      const sessionToken = await sessionStorage.get('sessionToken')
+      const sessionToken = await SafeStorage.get('sessionToken')
 
       console.warn('try', sessionToken)
       return {

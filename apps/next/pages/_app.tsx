@@ -18,9 +18,6 @@ function MyApp({
   Component,
   pageProps: { sessionToken, ...pageProps },
 }: MyAppProps) {
-  const session = getSessionAuth({ req: undefined, res: undefined })
-
-  console.log('server session', sessionToken)
   return (
     <>
       <Head>

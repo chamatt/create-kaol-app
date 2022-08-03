@@ -3,19 +3,11 @@ import bcrypt from 'bcrypt'
 import { z } from 'zod'
 
 import { createSession } from '../utils/auth'
-import { Context, createRouter, protectedRoute } from '../Context'
+import { Context, createRouter, protectedRoute } from './context'
 import signup, { SignupSchema } from '../services/signup'
 
 export const authRouter = createRouter()
-  .merge(
-    'me',
-    protectedRoute.query('', {
-      resolve: async ({ ctx }) => {
-        return ctx.user
-      },
-    })
-  )
-  .mutation('login', {
+  .mutation('signIn', {
     input: z.object({
       email: z
         .string({ required_error: 'Email is required' })
@@ -42,7 +34,7 @@ export const authRouter = createRouter()
       return { token }
     },
   })
-  .mutation('signup', {
+  .mutation('signUp', {
     input: SignupSchema,
     resolve: async ({ input: { email, password } }) => {
       const user = await signup({ email, password })
@@ -50,3 +42,11 @@ export const authRouter = createRouter()
       return { token }
     },
   })
+  .merge(
+    'me',
+    protectedRoute.query('', {
+      resolve: async ({ ctx }) => {
+        return ctx.user
+      },
+    })
+  )
