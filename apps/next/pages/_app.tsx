@@ -3,10 +3,21 @@ import Head from 'next/head'
 import React from 'react'
 import type { SolitoAppProps } from 'solito'
 import { withTRPC } from '@trpc/next'
-import type { AppRouter } from 'api/src/routers'
+import type { AppRouter } from 'api/src/index'
 import 'raf/polyfill'
+import { getSessionAuth } from '../lib/ssrHelpers'
+import { AppContext } from 'next/app'
 
-function MyApp({ Component, pageProps }: SolitoAppProps) {
+interface MyAppProps extends SolitoAppProps {
+  pageProps: {
+    sessionToken: string
+  }
+}
+
+function MyApp({
+  Component,
+  pageProps: { sessionToken, ...pageProps },
+}: MyAppProps) {
   return (
     <>
       <Head>
@@ -17,11 +28,21 @@ function MyApp({ Component, pageProps }: SolitoAppProps) {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Provider>
+      <Provider sessionTokenServer={sessionToken}>
         <Component {...pageProps} />
       </Provider>
     </>
   )
+}
+
+MyApp.getInitialProps = async ({ ctx }: AppContext) => {
+  const { req, res } = ctx || {}
+  const { sessionToken } = getSessionAuth({ req, res })
+  return {
+    pageProps: {
+      sessionToken: sessionToken,
+    },
+  }
 }
 
 const getBaseUrl = () => {
@@ -44,19 +65,25 @@ export default withTRPC<AppRouter>({
 
     return {
       url,
+
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
       // queryClientConfig: { defaultOptions: { queries: { staleTime: 60 } } },
-      headers: () => {
+      headers: async () => {
+        const { req, res } = ctx || {}
+        const { headers } = getSessionAuth({ req, res })
         if (ctx?.req) {
           // on ssr, forward client's headers to the server
           return {
             ...ctx.req.headers,
             'x-ssr': '1',
+            ...headers,
           }
         }
-        return {}
+        return {
+          ...headers,
+        }
       },
     }
   },

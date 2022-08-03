@@ -2,7 +2,7 @@
  * This file contains tRPC's HTTP response handler
  */
 import * as trpcNext from '@trpc/server/adapters/next'
-import { appRouter } from 'api/src/routers'
+import { appRouter } from 'api/src/index'
 import { createContext } from 'api/src/routers/context'
 
 export default trpcNext.createNextApiHandler({

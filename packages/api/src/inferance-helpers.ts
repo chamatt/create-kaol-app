@@ -1,4 +1,4 @@
-import type { AppRouter } from './routers'
+import type { AppRouter } from '.'
 import { inferProcedureInput, inferProcedureOutput } from '@trpc/server'
 /**
  * This is a helper method to infer the output of a query resolver

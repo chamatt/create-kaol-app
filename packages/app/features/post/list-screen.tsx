@@ -1,41 +1,17 @@
 import { trpc } from 'app/utils/trpc'
-import tw, { styled } from '../../utils/tw'
-import { Text, View, H1, P, A, useSx } from 'dripsy'
+import tw, { styled } from '../../design-system/tailwind'
+import { Text, View } from 'dripsy'
 import { View as RNView } from 'react-native'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 
 const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
 
-export function HomeScreen() {
+export function PostListScreen() {
   const { data: posts } = trpc.useQuery(['post.get-all'])
 
   return (
-    <View style={tw`flex-1 justify-center items-center p-4`}>
-      <H1 style={tw`font-extrabold text-3xl`}>Welcome to Kaol.</H1>
-      <View sx={{ maxWidth: 600 }}>
-        <P sx={{ textAlign: 'center' }}>
-          Here is a basic starter to show you how you can navigate from one
-          screen to another. This screen uses the same code on Next.js and React
-          Native.
-        </P>
-        <P sx={{ textAlign: 'center' }}>
-          Kaol is made by{' '}
-          <A
-            href="https://github.com/chamatt"
-            // @ts-expect-error react-native-web only types
-            hrefAttrs={{
-              target: '_blank',
-              rel: 'noreferrer',
-            }}
-            sx={{ color: 'blue' }}
-          >
-            @chamatt
-          </A>
-          .
-        </P>
-      </View>
-      <View sx={{ height: 32 }} />
+    <RNView style={tw`flex-1 justify-center items-center p-4`}>
       {posts?.map((post) => (
         <Card key={post.id}>
           <TextLink
@@ -67,6 +43,6 @@ export function HomeScreen() {
           </MotiLink>
         </Card>
       ))}
-    </View>
+    </RNView>
   )
 }

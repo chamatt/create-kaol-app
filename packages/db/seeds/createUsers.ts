@@ -1,16 +1,15 @@
+import signup from 'api/src/services/signup'
 import { prisma } from './client'
 
 export const createUsers = async () => {
-  const example = await prisma.user.create({
-    data: {
-      name: 'Example User',
-    },
+  const example = await signup({
+    email: 'example@kaol.com',
+    password: 'example',
   })
 
-  const admin = await prisma.user.create({
-    data: {
-      name: 'Admin User',
-    },
+  const admin = await signup({
+    email: 'admin@kaol.com',
+    password: 'admin',
   })
 
   return {

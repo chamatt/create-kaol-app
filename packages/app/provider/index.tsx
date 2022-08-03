@@ -1,10 +1,26 @@
-import { Dripsy } from './dripsy'
-import { NavigationProvider } from './navigation'
+import { APIProvider } from './APIProvider'
+import { AuthProvider } from './AuthProvider'
+import { DripsyProvider } from './DripsyProvider/DripsyProvider'
+import { NavigationProvider } from './NavigationContainer/NavigationContainer'
 
-export function Provider({ children }: { children: React.ReactNode }) {
+// This is the root provider for the app.
+// Next.js location: apps/next/pages/_app.tsx
+// Expo location: apps/expo/App.tsx
+
+export function Provider({
+  children,
+  sessionTokenServer,
+}: {
+  children: React.ReactNode
+  sessionTokenServer?: string
+}) {
   return (
-    <NavigationProvider>
-      <Dripsy>{children}</Dripsy>
-    </NavigationProvider>
+    <APIProvider>
+      <AuthProvider initialToken={sessionTokenServer}>
+        <NavigationProvider>
+          <DripsyProvider>{children}</DripsyProvider>
+        </NavigationProvider>
+      </AuthProvider>
+    </APIProvider>
   )
 }

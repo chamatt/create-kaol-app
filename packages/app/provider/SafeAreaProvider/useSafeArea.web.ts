@@ -7,7 +7,7 @@
 // after all, safe area code is few-and-far-between, so if you have to write some platform-speciifc code for it,
 // that is probably better than a massive bundle size for little benefit
 
-import type { useSafeArea as nativeHook } from './use-safe-area'
+import type { useSafeArea as nativeHook } from './useSafeArea'
 
 const area = {
   bottom: 0,
