@@ -1,9 +1,9 @@
 import { trpc } from 'app/utils/trpc'
-import { View, Text } from 'dripsy'
 import { createParam } from 'solito'
 import { TextLink } from 'solito/link'
 import { NavigationPaths } from 'app/navigation/native'
 import { styled, tw } from 'universal/tailwind'
+import { Text, View } from 'universal'
 
 const { useParam } = createParam<{ id: string }>()
 
@@ -21,13 +21,13 @@ export function PostDetailScreen() {
 
   if (isLoading)
     return (
-      <View style={tw`flex justify-center items-center`}>
+      <View className="flex justify-center items-center">
         <TextStyled className="text-center font-bold">Loading...</TextStyled>
       </View>
     )
 
   return (
-    <View style={tw`flex-1 justify-center items-center`}>
+    <View className="flex-1 justify-center items-center">
       <TextStyled className="text-center font-bold text-red-500">
         {data?.title}
       </TextStyled>

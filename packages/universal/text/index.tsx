@@ -1,26 +1,9 @@
 import { ComponentProps } from 'react'
-import { Text as DripsyText, Theme } from 'dripsy'
+import { Text as RNText } from 'react-native'
 
-import { tw as tailwind } from 'universal/tailwind'
+import { styled, tw as tailwind } from 'universal/tailwind'
 
-type Variant = keyof Theme['text']
-
-type TextProps = { tw?: string; variant?: Variant } & Omit<
-  ComponentProps<typeof DripsyText>,
-  'variant'
->
-
-// Note: You can wrap <DripsyText> in a <View> with a background color
+// Note: You can wrap <Text> in a <View> with a background color
 // to verify if the text is rendered correctly and if Capsize is working well.
 
-const Text = ({ tw, sx, variant, ...props }: TextProps) => {
-  return (
-    <DripsyText
-      sx={{ ...sx, ...tailwind.style(tw) }}
-      variant={variant}
-      {...props}
-    />
-  )
-}
-
-export { Text }
+export const Text = styled(RNText)

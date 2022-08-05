@@ -1,8 +1,11 @@
-import { H1, P, A } from 'dripsy'
 import { TextLink } from 'solito/link'
-import { useAuth } from 'app/provider/AuthProvider'
+import {
+  AuthenticatedOnly,
+  UnauthenticatedOnly,
+  useAuth,
+} from 'app/provider/AuthProvider'
 import { Button } from 'app/components/Button'
-import { View } from 'universal'
+import { Text, View } from 'universal'
 import { NavigationPaths } from 'app/navigation/native'
 import { tw } from 'universal/tailwind'
 
@@ -10,41 +13,21 @@ export function HomeScreen() {
   const { user, logout, isAuthenticated } = useAuth()
 
   return (
-    <View tw="flex-1 justify-center items-center p-4">
-      {!isAuthenticated && (
-        <TextLink
-          href={NavigationPaths.screens.login}
-          textProps={{
-            style: tw`text-md font-bold text-blue-700 mb-2`,
-          }}
-        >
-          Login
-        </TextLink>
-      )}
-      <H1 style={tw`font-extrabold text-3xl`}>
+    <View className="flex-1 justify-center items-center p-4">
+      <Text className="font-extrabold text-3xl">
         Welcome to Kaol. {user?.email}
-      </H1>
+      </Text>
 
-      <View sx={{ maxWidth: 600 }}>
-        <P>
+      <View className="max-w-base my-8">
+        <Text>
           Here is a basic starter to show you how you can navigate from one
           screen to another. This screen uses the same code on Next.js and React
           Native.
-        </P>
-        <P sx={{ textAlign: 'center' }}>
+        </Text>
+        <Text className="text-center">
           Kaol is made by{' '}
-          <A
-            href="https://github.com/chamatt"
-            // @ts-expect-error react-native-web only types
-            hrefAttrs={{
-              target: '_blank',
-              rel: 'noreferrer',
-            }}
-          >
-            @chamatt
-          </A>
-          .
-        </P>
+          <TextLink href="https://github.com/chamatt">@chamatt</TextLink>.
+        </Text>
       </View>
       <TextLink
         href={NavigationPaths.screens['post-list']}
@@ -55,8 +38,9 @@ export function HomeScreen() {
         Posts
       </TextLink>
 
-      <View sx={{ height: 32 }} />
-      {!isAuthenticated && (
+      <View className="h-8" />
+
+      <UnauthenticatedOnly>
         <TextLink
           href={NavigationPaths.screens.login}
           textProps={{
@@ -65,8 +49,8 @@ export function HomeScreen() {
         >
           Login
         </TextLink>
-      )}
-      {isAuthenticated && (
+      </UnauthenticatedOnly>
+      <AuthenticatedOnly>
         <Button
           onPress={async () => {
             try {
@@ -76,7 +60,7 @@ export function HomeScreen() {
         >
           Logout
         </Button>
-      )}
+      </AuthenticatedOnly>
     </View>
   )
 }

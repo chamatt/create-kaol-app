@@ -14,7 +14,7 @@ I created this project for a personal need, I wanted something like the create-t
 - `Prisma`
 - `solito` for cross-platform navigation
 - `moti` for animations (basically framer-motion but works in both expo and web)
-- `dripsy` for theming/design (you can bring your own, too) (@todo: change to tailwind)
+- `twrnc` tailwind for react native
 - `Expo` SDK 44
 - `Next.js` 12
 - `tRPC` 9

@@ -13,7 +13,6 @@ const createTrpcClient = () => {
     async headers() {
       const sessionToken = await SafeStorage.get('sessionToken')
 
-      console.warn('try', sessionToken)
       return {
         authorization: sessionToken ? `Bearer ${sessionToken}` : undefined,
         'Content-Type': 'application/json',

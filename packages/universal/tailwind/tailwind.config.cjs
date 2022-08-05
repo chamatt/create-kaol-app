@@ -1,9 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
-const { plugin } = require('twrnc')
-const { textSizes, fontFamily } = require('universal/typography')
 
-const { MAX_CONTENT_WIDTH, MAX_HEADER_WIDTH } = require('./layout')
 const { colors } = require('./colors')
+const { MAX_CONTENT_WIDTH, MAX_HEADER_WIDTH } = require('./layout')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -62,14 +60,6 @@ module.exports = {
         copy: 'copy',
       },
       fontSize: {},
-      fontFamily: {
-        space: fontFamily('SpaceGrotesk-Regular'),
-        'space-bold': fontFamily('SpaceGrotesk-Bold'),
-        inter: fontFamily('Inter-Regular'),
-        'inter-semibold': fontFamily('Inter-SemiBold'),
-        'inter-bold': fontFamily('Inter-Bold'),
-        sans: [fontFamily('Inter-Regular'), ...defaultTheme.fontFamily.sans],
-      },
       whitespace: {
         'break-spaces': 'break-spaces',
       },
@@ -83,25 +73,4 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    plugin(({ addUtilities }) => {
-      addUtilities({
-        'text-xs': textSizes['text-xs'],
-        'text-13': textSizes['text-13'],
-        'text-sm': textSizes['text-sm'],
-        'text-base': textSizes['text-base'],
-        'text-lg': {
-          ...textSizes['text-lg'],
-          fontFamily: fontFamily('SpaceGrotesk-Bold'),
-        },
-        'text-xl': textSizes['text-xl'],
-        'text-2xl': {
-          ...textSizes['text-2xl'],
-          fontFamily: fontFamily('SpaceGrotesk-Bold'),
-        },
-        'text-3xl': textSizes['text-3xl'],
-        'text-4xl': textSizes['text-4xl'],
-      })
-    }),
-  ],
 }

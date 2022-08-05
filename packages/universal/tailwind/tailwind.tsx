@@ -1,12 +1,14 @@
+import { FunctionComponent } from 'react'
 import { StyleProp } from 'react-native'
 import { create, TwConfig } from 'twrnc'
 import { ClassInput } from 'twrnc/dist/esm/types'
-import config from './tailwind.config.js'
+import config from './tailwind.config.cjs'
 
 export const tw = create(config as TwConfig)
 
 type StyledTailwind = {
   className?: string
+  tw?: string
   style?: StyleProp<any>
 }
 
@@ -27,18 +29,24 @@ const TextStyled = styled(Text)
 // Or you can just use the `tw` function:
 <View style={tw`bg-blue-500`}>
 
- * @description wraps a React Component and adds a className props that accepts tailwind classes
+ * @description wraps a React Component and adds a className/tw props that accepts tailwind classes
  */
+
 export function styled<P>(
   WrappedComponent: React.ComponentType<P>,
   ...inputs: ClassInput[]
-) {
+): FunctionComponent<P & StyledTailwind> {
   const ComponentWithStyle = (props: P & StyledTailwind) => {
     return (
       <WrappedComponent
         {...props}
         style={[
-          tw.style(...inputs, props.className, ...[].concat(props.style)),
+          tw.style(
+            ...inputs,
+            props.tw,
+            props.className,
+            ...[].concat(props.style)
+          ),
         ]}
       />
     )
