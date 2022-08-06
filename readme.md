@@ -19,8 +19,7 @@ I created this project for a personal need, I wanted something like the create-t
 - `Next.js` 12
 - `tRPC` 9
 - `React Navigation` 6
-
-- Future: I would like to add nextauth if I figure out a way to do it
+-  Email/Password authentication pre-configured
 
 ## 🗂 Folder layout
 
