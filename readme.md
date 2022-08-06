@@ -54,7 +54,10 @@ Dependencies: You need docker installed and running to be able to run this stack
 - Run `yarn dev` for local development using turbo
 - Or run `yarn dev:tabs` if you want to run web and mobile on different terminal tabs (needed if want to interact with expo CLI)
 
-- It will run prisma studio ([localhost:5555](localhost:5555)), expo (open in iOS simulator by default) and nextjs ([localhost:3000](localhost:4000))
+- It will open:
+  - Prisma Studio `localhost:5555`
+  - Expo `default to iOS simulator`
+  - Next.js `localhost:4000`
 
 ## 🆕 Add new dependencies
 
