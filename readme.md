@@ -30,12 +30,12 @@ I created this project for a personal need, I wanted something like the create-t
 
 - `packages/` shared packages across apps
   - `app/` you'll be importing most files from `app/`
-    - `features/` (don't use a `screens` folder. organize by feature.)
+    - `features/` screens of your app, organized by domains/feature
     - `provider/` (all the providers that wrap the app, and some no-ops for Web.)
-    - `navigation/` Next.js has a `pages/` folder. React Native doesn't. This folder contains navigation-related code for RN. You may use it for any navigation code, such as custom links.
-      - `native/`
+    - `navigation/`
+      - `native/` Next.js has a `pages/` folder. React Native doesn't. This folder contains react-navigation-related code for RN, you should place yours navigations like StackNavigation, BottomNavigation, etc, here.
         - `index.tsx` Entrypoint for react-navigation
-      - `routePaths.tsx` - Here you setup the route mapping between the react-navigation and the URLs that they map to in your nextjs app.
+      - `routePaths.tsx` - `!! IMPORTANT !!` Here you setup the route mapping between react-navigation routes and the URLs that they map to in your NextJS app.
   - `api/` your trpc api with your routes
   - `db/` your prisma db with a pre-populated sqlite file
      - `seeds/` Seeds for pre-populating te postgres database
