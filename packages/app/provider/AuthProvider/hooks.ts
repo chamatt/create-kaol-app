@@ -71,7 +71,7 @@ export const useSignUp = (setSessionToken: (token: string) => void) => {
   return signupMutation
 }
 
-export const useGetMe = (sessionToken) => {
+export const useGetMe = (sessionToken: string) => {
   return trpc.useQuery(['auth.me'], {
     enabled: !!sessionToken,
     retry: false,

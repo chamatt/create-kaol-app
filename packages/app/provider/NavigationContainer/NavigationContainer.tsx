@@ -9,7 +9,9 @@ const screens = Object.entries(NavigationPaths).reduce(
     acc[name] = route
     return acc
   },
-  {}
+  {} as {
+    [K in keyof typeof NavigationPaths]: typeof NavigationPaths[keyof typeof NavigationPaths]['route']
+  }
 )
 
 export function NavigationProvider({
