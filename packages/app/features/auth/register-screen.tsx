@@ -9,15 +9,14 @@ import { ScrollView, TextInput } from 'react-native'
 import { NavigationPaths } from 'app/navigation/routePaths'
 
 const Card = styled(View, 'bg-white shadow-sm mb-4 p-6 border max-w-lg w-full')
-const Input = styled(TextInput, 'bg-white shadow-sm border py-2 px-2')
 
-export function LoginScreen() {
+export function RegisterScreen() {
   const router = useRouter()
-  const { isAuthenticated, signIn, signInLoading, errorMessage } = useAuth()
+  const { isAuthenticated, signUp, signUpLoading, errorMessage } = useAuth()
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.push(NavigationPaths.home.getPath())
+      router.replace(NavigationPaths.home.getPath())
     }
   }, [router, isAuthenticated])
 
@@ -28,23 +27,24 @@ export function LoginScreen() {
     <ScrollView>
       <View className="flex-1 justify-center items-center p-4">
         <Card>
-          <Text className="text-center text-2xl font-bold mb-4">Login</Text>
-          <Input
+          <Text className="text-center text-2xl font-bold mb-4">Signup</Text>
+
+          <TextInput
             placeholder="Email"
             placeholderTextColor={colors.gray[500]}
             autoCapitalize="none"
             style={tw`bg-white shadow-sm border py-2 px-2`}
             onChangeText={setEmail}
-          ></Input>
+          ></TextInput>
           <View tw="mb-2" />
-          <Input
+          <TextInput
             placeholder="Password"
             placeholderTextColor={colors.gray[500]}
             autoCapitalize="none"
             secureTextEntry
             style={tw`bg-white shadow-sm border py-2 px-2`}
             onChangeText={setPassword}
-          ></Input>
+          ></TextInput>
 
           {errorMessage && (
             <Text className="text-red-600 my-2 text-center">
@@ -56,35 +56,28 @@ export function LoginScreen() {
             <Button
               className="w-32 text-center"
               textStyle={tw`text-center flex justify-center items-center`}
-              disabled={signInLoading}
+              disabled={signUpLoading}
               onPress={() => {
-                signIn({ email, password })
+                signUp({ email, password })
               }}
             >
-              Login
+              Signup
             </Button>
           </View>
 
           <View tw="mt-4 items-center">
             <TextLink
-              href={NavigationPaths.signUp.getPath()}
+              href={NavigationPaths.login.getPath()}
               textProps={{
                 style: tw`text-blue-800`,
               }}
             >
-              Don&apos;t have an account? Sign up here.
+              Already have an account? Sign up here.
             </TextLink>
           </View>
+
+          <View tw="mb-4" />
         </Card>
-      </View>
-
-      <View className="p-4 items-center">
-        <Text>Use a seeded account or create one</Text>
-
-        <View className="flex mt-2 text-center">
-          <Text className="text-center">example@kaol.com / example</Text>
-          <Text className="text-center">admin@kaol.com / admin</Text>
-        </View>
       </View>
     </ScrollView>
   )

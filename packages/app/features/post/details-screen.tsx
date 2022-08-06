@@ -1,11 +1,11 @@
 import { trpc } from 'app/utils/trpc'
 import { createParam } from 'solito'
-import { TextLink } from 'solito/link'
-import { NavigationPaths } from 'app/navigation/native'
 import { styled, tw } from 'universal/tailwind'
 import { Text, View } from 'universal'
+import { GoBack } from 'app/components/GoBack'
+import { NavigationTypes } from 'app/navigation/routePaths'
 
-const { useParam } = createParam<{ id: string }>()
+const { useParam } = createParam<NavigationTypes['postDetail']>()
 
 // If you wrap a component in `styled`, you can pass the tailwind classes
 // directly through the `className` prop.
@@ -27,7 +27,7 @@ export function PostDetailScreen() {
     )
 
   return (
-    <View className="flex-1 justify-center items-center">
+    <View className="flex-1 justify-center items-center p-4">
       <TextStyled className="text-center font-bold text-red-500">
         {data?.title}
       </TextStyled>
@@ -35,7 +35,7 @@ export function PostDetailScreen() {
       <TextStyled className="text-gray-600">
         By: {data?.author?.email}
       </TextStyled>
-      <TextLink href={NavigationPaths.screens.home}>👈 Go Home</TextLink>
+      <GoBack />
     </View>
   )
 }

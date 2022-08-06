@@ -3,41 +3,21 @@ import bcrypt from 'bcrypt'
 import { z } from 'zod'
 
 import { createSession } from '../utils/auth'
-import { Context, createRouter, protectedRoute } from './context'
-import signup, { SignupSchema } from '../services/signup'
+import { createRouter, protectedRoute } from './context'
+import signIn, { SignInSchema } from '../services/auth/signIn'
+import signUp, { SignUpSchema } from '../services/auth/signUp'
 
 export const authRouter = createRouter()
   .mutation('signIn', {
-    input: z.object({
-      email: z
-        .string({ required_error: 'Email is required' })
-        .email({ message: 'Email is not valid' }),
-      password: z.string({ required_error: 'Password is required' }),
-    }),
-    resolve: async ({ input: { email, password }, ctx: { prisma } }) => {
-      const user = await prisma.user.findUnique({
-        where: {
-          email: email,
-        },
-      })
-
-      if (!user) throw new Error('Invalid credentials')
-
-      const doPasswordsMatch = await bcrypt.compare(
-        password,
-        user.hashedPassword
-      )
-      if (!doPasswordsMatch) throw new Error('Invalid credentials')
-
-      const token = await createSession(user)
-
-      return { token }
+    input: SignInSchema,
+    resolve: async ({ input: { email, password } }) => {
+      return signIn({ email, password })
     },
   })
   .mutation('signUp', {
-    input: SignupSchema,
+    input: SignUpSchema,
     resolve: async ({ input: { email, password } }) => {
-      const user = await signup({ email, password })
+      const user = await signUp({ email, password })
       const token = await createSession(user)
       return { token }
     },

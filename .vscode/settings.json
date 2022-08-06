@@ -5,6 +5,9 @@
     "tw\\.style\\(([^)]*)\\)",
     // match styled components:  Styled(Component, "")
     ["styled\\([^,]([^)]*)\\)", "'([^']*)'"],
-    ["styled\\([^,]([^)]*)\\)", "\"([^\"]*)\""]
+    ["styled\\([^,]([^)]*)\\)", "\"([^\"]*)\""],
+    // match classNames props, and tw props
+    "className=\"([^\"]*)\"",
+    "tw=\"([^\"]*)\""
   ]
 }

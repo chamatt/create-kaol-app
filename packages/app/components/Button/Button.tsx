@@ -1,19 +1,26 @@
-import { TouchableOpacity } from 'react-native'
+import { StyleProp, TouchableOpacity, ViewStyle } from 'react-native'
 import { Text } from 'universal'
-import { tw } from 'universal/tailwind'
+import { styled, tw } from 'universal/tailwind'
 
-type ButtonProps = {
+export type ButtonProps = {
   children: React.ReactNode
   isLoading?: boolean
+  textStyle?: StyleProp<ViewStyle>
 } & React.ComponentProps<typeof TouchableOpacity>
 
-export const Button = ({ children, isLoading, ...props }: ButtonProps) => {
-  return (
-    <TouchableOpacity
-      {...props}
-      style={tw`border-2 border-gray-600 p-2 rounded-lg`}
-    >
-      {isLoading ? <Text>Loading...</Text> : <Text>{children}</Text>}
-    </TouchableOpacity>
-  )
-}
+export const Button = styled(
+  ({ children, isLoading, style, textStyle, ...props }: ButtonProps) => {
+    return (
+      <TouchableOpacity
+        style={[tw`border border-gray-600 p-2 cursor-pointer`, style]}
+        {...props}
+      >
+        {isLoading ? (
+          <Text style={textStyle}>Loading...</Text>
+        ) : (
+          <Text style={textStyle}>{children}</Text>
+        )}
+      </TouchableOpacity>
+    )
+  }
+)

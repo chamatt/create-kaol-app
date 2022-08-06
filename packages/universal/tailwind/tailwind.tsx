@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 import { StyleProp } from 'react-native'
 import { create, TwConfig } from 'twrnc'
 import { ClassInput } from 'twrnc/dist/esm/types'
-import config from './tailwind.config.cjs'
+import config from './tailwind.config'
 
 export const tw = create(config as TwConfig)
 

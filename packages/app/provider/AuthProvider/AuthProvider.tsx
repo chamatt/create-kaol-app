@@ -65,7 +65,7 @@ export const useAuth = () => {
 
 export const AuthenticatedOnly = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated } = useAuth()
-  return isAuthenticated ? children : null
+  return isAuthenticated ? <>{children}</> : null
 }
 
 export const UnauthenticatedOnly = ({

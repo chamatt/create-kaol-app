@@ -6,7 +6,7 @@ import {
 } from 'app/provider/AuthProvider'
 import { Button } from 'app/components/Button'
 import { Text, View } from 'universal'
-import { NavigationPaths } from 'app/navigation/native'
+import { NavigationPaths } from 'app/navigation/routePaths'
 import { tw } from 'universal/tailwind'
 
 export function HomeScreen() {
@@ -14,35 +14,27 @@ export function HomeScreen() {
 
   return (
     <View className="flex-1 justify-center items-center p-4">
-      <Text className="font-extrabold text-3xl">
+      <Text className="font-extrabold text-3xl text-center items-center">
         Welcome to Kaol. {user?.email}
       </Text>
 
       <View className="max-w-base my-8">
-        <Text>
+        <Text className="text-center mb-4">
           Here is a basic starter to show you how you can navigate from one
           screen to another. This screen uses the same code on Next.js and React
           Native.
         </Text>
-        <Text className="text-center">
+        <Text className="text-center " tw="">
           Kaol is made by{' '}
           <TextLink href="https://github.com/chamatt">@chamatt</TextLink>.
         </Text>
       </View>
-      <TextLink
-        href={NavigationPaths.screens['post-list']}
-        textProps={{
-          style: tw`text-md font-bold text-blue-700 mb-2`,
-        }}
-      >
-        Posts
-      </TextLink>
 
       <View className="h-8" />
 
       <UnauthenticatedOnly>
         <TextLink
-          href={NavigationPaths.screens.login}
+          href={NavigationPaths.login.getPath()}
           textProps={{
             style: tw`text-md font-bold text-blue-700 mb-2`,
           }}
@@ -51,15 +43,25 @@ export function HomeScreen() {
         </TextLink>
       </UnauthenticatedOnly>
       <AuthenticatedOnly>
-        <Button
-          onPress={async () => {
-            try {
-              logout()
-            } catch (err) {}
-          }}
-        >
-          Logout
-        </Button>
+        <>
+          <TextLink
+            href={NavigationPaths.postList.getPath()}
+            textProps={{
+              style: tw`text-md font-bold text-blue-700 mb-6`,
+            }}
+          >
+            Go to blog posts
+          </TextLink>
+          <Button
+            onPress={async () => {
+              try {
+                logout()
+              } catch (err) {}
+            }}
+          >
+            Logout
+          </Button>
+        </>
       </AuthenticatedOnly>
     </View>
   )

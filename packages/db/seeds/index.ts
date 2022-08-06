@@ -1,4 +1,3 @@
-import { prisma } from './client'
 import { createPosts } from './createPosts'
 import { createUsers } from './createUsers'
 

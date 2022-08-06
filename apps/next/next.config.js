@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // reactStrictMode: true,
-  // webpack5: true,
+  reactStrictMode: true,
+  webpack5: true,
 }
 
 const { withExpo } = require('@expo/next-adapter')

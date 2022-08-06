@@ -1,7 +1,16 @@
 import { NavigationContainer } from '@react-navigation/native'
-import { NavigationPaths } from 'app/navigation/native'
+import { INITIAL_ROUTE } from 'app/navigation/native'
+import { NavigationPaths } from 'app/navigation/routePaths'
 import * as Linking from 'expo-linking'
 import { useMemo } from 'react'
+
+const screens = Object.entries(NavigationPaths).reduce(
+  (acc, [name, { route }]) => {
+    acc[name] = route
+    return acc
+  },
+  {}
+)
 
 export function NavigationProvider({
   children,
@@ -11,7 +20,10 @@ export function NavigationProvider({
   const linking = useMemo(
     () => ({
       prefixes: [Linking.createURL('/')],
-      config: NavigationPaths,
+      config: {
+        screens,
+        initialRouteName: INITIAL_ROUTE,
+      },
     }),
     []
   )

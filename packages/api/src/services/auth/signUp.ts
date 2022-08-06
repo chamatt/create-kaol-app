@@ -1,10 +1,10 @@
 import * as trpc from '@trpc/server'
 import bcrypt from 'bcrypt'
 import { TRPCError } from '@trpc/server'
-import { prisma, prismaClient } from 'db'
+import { prismaClient } from 'db'
 import { z } from 'zod'
 
-export const SignupSchema = z.object({
+export const SignUpSchema = z.object({
   email: z.string().email({
     message: 'Email is not valid',
   }),
@@ -13,7 +13,7 @@ export const SignupSchema = z.object({
   }),
 })
 
-type SignupSchemaType = z.infer<typeof SignupSchema>
+type SignupSchemaType = z.infer<typeof SignUpSchema>
 
 const signup = async ({ email, password }: SignupSchemaType) => {
   const hashedPassword = await bcrypt.hash(password, 10)
