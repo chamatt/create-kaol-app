@@ -7,7 +7,7 @@ With this setup you can build a fullstack application with backend, frontend and
 
 ## ？Why
 
-I created this project for a personal need, I wanted something like the create-t3-app, but sharing code between the mobile app and the nextjs app. I could not get any of the available repos on github to work the way I wanted, so I decided to try and put a few of them together and after a few days of banging my head against the wall I finally managed to do it in a good way. There are still a few things I want to do, like ship a auth system and switch to tailwind, but this will take a few more days.
+I created this project for a personal need, I wanted something like the create-t3-app, but sharing code between the mobile app and the nextjs app. I could not get any of the available repos on github to work the way I wanted, so I decided to try and put a few of them together and after a few days of banging my head against the wall I finally managed to do it in a good way. There are still a few things I want to do, but it's currently the best universal app monorepo template amongst what I could find.
 
 ## 📦 Included packages
 
