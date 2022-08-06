@@ -112,6 +112,7 @@ This monorepo is pre-configured to work with vercel. You will need a postgres da
 - Head to `Settings -> Database`
 - Scroll down until you found the section called `Connection Pooling`
 - Make sure it's ENABLED
+- Change the pool mode to `Session`
 - Copy the connection string
 
 With that connection string, you will have two environment variabled you need.
