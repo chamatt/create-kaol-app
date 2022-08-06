@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "solito-blank",
-    "slug": "solito-blank",
+    "name": "kaol-expo",
+    "slug": "kaol-expo",
     "version": "1.0.0",
     "sdkVersion": "44.0.0",
-    "scheme": "solito-blank",
+    "scheme": "kaol-expo",
     "platforms": ["ios", "android"],
     "ios": {
-      "bundleIdentifier": "com.solito.blank"
+      "bundleIdentifier": "com.chamatt.kaol"
     }
   }
 }

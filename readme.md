@@ -19,7 +19,7 @@ I created this project for a personal need, I wanted something like the create-t
 - `Next.js` 12
 - `tRPC` 9
 - `React Navigation` 6
--  Email/Password authentication pre-configured
+- `Authentication` with email/password pre-configured
 
 ## 🗂 Folder layout
 
@@ -28,14 +28,19 @@ I created this project for a personal need, I wanted something like the create-t
   - `expo`
   - `next`
 
-- `packages` shared packages across apps
-  - `app` you'll be importing most files from `app/`
-    - `features` (don't use a `screens` folder. organize by feature.)
-    - `provider` (all the providers that wrap the app, and some no-ops for Web.)
-    - `navigation` Next.js has a `pages/` folder. React Native doesn't. This folder contains navigation-related code for RN. You may use it for any navigation code, such as custom links.
+- `packages/` shared packages across apps
+  - `app/` you'll be importing most files from `app/`
+    - `features/` (don't use a `screens` folder. organize by feature.)
+    - `provider/` (all the providers that wrap the app, and some no-ops for Web.)
+    - `navigation/` Next.js has a `pages/` folder. React Native doesn't. This folder contains navigation-related code for RN. You may use it for any navigation code, such as custom links.
+      - `native/`
+        - `index.tsx` Entrypoint for react-navigation
+      - `routePaths.tsx` - Here you setup the route mapping between the react-navigation and the URLs that they map to in your nextjs app.
   - `api` your trpc api with your routes
   - `db` your prisma db with a pre-populated sqlite file
   - `config` your environment configs
+  - `universal` a place to put your universal components.
+    - `universal/tailwind` exports some tailwind utilities that you will use to make components support tailwind className/tw prop.
 
 You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
 
@@ -43,9 +48,9 @@ You can add other folders inside of `packages/` if you know what you're doing an
 
 - Install dependencies: `yarn`
 
-- Run `yarn dev` for local development
-- It will run prisma studio ([localhost:5555](localhost:5555)), expo (open in iOS simulator by default) and nextjs ([localhost:3000](localhost:3000))
-- You can access the nextjs app at: `localhost:4000`
+- Run `yarn dev` for local development using turbo
+- Or run `yarn dev:tabs` if you want to run web and mobile on different terminal tabs (needed if want to interact with expo CLI)
+- It will run prisma studio ([localhost:5555](localhost:5555)), expo (open in iOS simulator by default) and nextjs ([localhost:3000](localhost:4000))
 
 ## 🆕 Add new dependencies
 
@@ -84,6 +89,61 @@ const withTM = require('next-transpile-modules')([
     // add it here
 ])
 ```
+
+# Deploying to production (web and api)
+
+This monorepo is pre-configured to work with vercel. You will need a postgres database, preferably with `pgBounger` enabled in `session` mode.
+
+## Start the project in vercel
+
+- Head to [vercel.com/new](https://vercel.com/new) and import your git repo that you created from this template.
+- That's it for now, we'll come back to it later.
+
+## Create a free database in supabase
+
+- Setup a new database in supabase, wait a few minutes until it's fully setup.
+- Head to `Settings -> Database`
+- Scroll down until you found the section called `Connection Pooling`
+- Make sure it's ENABLED
+- Copy the connection string
+
+With that connection string, you will have two environment variabled you need.
+
+First one is the `MIGRATION_DB_URL`, this will be the connection string you copied above. This will be used during deployment to migrate the db to the latest migration.
+
+First one is the `DATABASE_URL`, it will be the same connection string you copied above, but with `?pgbouncer=true&schema=public&connection_limit=1` appended at the end.
+This is what the app will use, and it's has connection pool enabled, which is a requirement for serverless environments
+
+## Setup environment variables in vercel
+
+- Back to vercel.com, head to your app, then go to `Settings -> Environment Variables`
+- Add the following environment variables (replace the values with your specific values)
+  - Make sure to uncheck `Preview` and `Development`, and leave only `Production`
+
+```sh
+MIGRATION_DB_URL="postgres://<user>:<password>@<supabase_db_url>:6543/postgres"
+
+DATABASE_URL="postgres://<user>:<password>@<supabase_db_url>:6543/<database>?pgbouncer=true&schema=public&connection_limit=1"
+
+TOKEN_KEY="SOME_VERY_STRONG_SECRET_THAT_WILL_HASH_THE_PASSWORDS"
+```
+
+`!! IMPORTANT !!`
+
+This will break preview apps because they won't have any databases. If you want them to work you can repeat the same steps above to create a NEW database on supabase, and setup new environment variables only for the `Preview` environment.
+
+## Redeploy the app
+
+After changing the environement variables, you will need to redeploy the app. To do that you need to push a new commit to the repository. You can have an empty commit like this:
+
+```
+git commit --alow-empty -m "redeploy"
+git push origin master
+```
+
+## Done
+
+Your are not done, your app should be up and running with authentication working.
 
 ## 🎙 Credits
 

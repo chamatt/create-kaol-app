@@ -72,3 +72,4 @@ web-build/
 .turbo
 build/**
 .vercel
+.vercel/**

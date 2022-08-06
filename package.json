@@ -1,5 +1,5 @@
 {
-  "name": "solito-blank",
+  "name": "kaol-starter",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -17,16 +17,20 @@
     "eslint": "^8.11.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "ts-node": "^10.9.1",
+    "ttab": "^0.7.2",
     "turbo": "^1.1.6",
     "typescript": "^4.7.4"
   },
   "scripts": {
-    "dev": "yarn db:up && yarn db:migrate:dev && turbo run dev --parallel",
-    "dev:web": "yarn db:dev && turbo run dev --scope=!expo",
-    "native": "cd apps/expo && expo start",
-    "web": "cd apps/next && yarn next",
+    "dev": "yarn db:dev && turbo run dev --parallel",
+    "native": "cd apps/expo && yarn dev",
+    "web": "cd apps/next && yarn dev",
+    "dev:tabs": "yarn db:dev && run-s tab:web tab:native",
+    "tab:native": "ttab -t 'Expo' yarn native",
+    "tab:web": "ttab -t 'NextJS' npm run web",
     "build": "turbo run build",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx,.json",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -49,5 +53,8 @@
     "*.{js,jsx,ts,tsx,json}": [
       "yarn format"
     ]
-  }
+  },
+  "modulePathIgnorePatterns": [
+    "<rootDir>[/\\\\](build|docs|node_modules|deploy|scripts|.vercel|output)[/\\\\]"
+  ]
 }
