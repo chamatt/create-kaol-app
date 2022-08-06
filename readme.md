@@ -151,9 +151,9 @@ git push origin master
 
 ## Done
 
-Your are not done, your app should be up and running with authentication working.
+Your are now done, your app should be up and running with authentication working.
 
-## 🎙 Credits
+# 🎙 Credits
 
 This setup is heavily inspired on a few projects:
 
