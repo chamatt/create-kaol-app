@@ -6,7 +6,7 @@ import { useMemo } from 'react'
 
 const screens = Object.entries(NavigationPaths).reduce(
   (acc, [name, { route }]) => {
-    acc[name] = route
+    acc[name as keyof typeof NavigationPaths] = route
     return acc
   },
   {} as {

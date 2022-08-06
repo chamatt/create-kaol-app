@@ -1,6 +1,6 @@
 type TW = string | string[]
 
-export { TW }
+export type { TW }
 
 export type WithTWProp<P> = P & {
   tw?: TW
