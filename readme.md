@@ -36,20 +36,24 @@ I created this project for a personal need, I wanted something like the create-t
       - `native/`
         - `index.tsx` Entrypoint for react-navigation
       - `routePaths.tsx` - Here you setup the route mapping between the react-navigation and the URLs that they map to in your nextjs app.
-  - `api` your trpc api with your routes
-  - `db` your prisma db with a pre-populated sqlite file
-  - `config` your environment configs
-  - `universal` a place to put your universal components.
+  - `api/` your trpc api with your routes
+  - `db/` your prisma db with a pre-populated sqlite file
+     - `seeds/` Seeds for pre-populating te postgres database
+  - `config/` your environment configs
+  - `universal/` a place to put your universal components.
     - `universal/tailwind` exports some tailwind utilities that you will use to make components support tailwind className/tw prop.
 
 You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
 
 ## 🏁 Start the app
 
+Dependencies: You need docker installed and running to be able to run this stack, as the postgres database is in a docker container. If you're on mac or windows, just make sure `docker desktop` is opened.
+
 - Install dependencies: `yarn`
 
 - Run `yarn dev` for local development using turbo
 - Or run `yarn dev:tabs` if you want to run web and mobile on different terminal tabs (needed if want to interact with expo CLI)
+
 - It will run prisma studio ([localhost:5555](localhost:5555)), expo (open in iOS simulator by default) and nextjs ([localhost:3000](localhost:4000))
 
 ## 🆕 Add new dependencies
