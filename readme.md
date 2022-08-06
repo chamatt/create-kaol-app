@@ -2,7 +2,7 @@
 
 ## 🔦 About
 
-A monorepo with Prisma, Next.js, Expo, tRPC and Solito setup and configured to work together.
+A monorepo with Prisma, Next.js, Expo, tRPC, Authentication and Solito setup and configured to work together.
 With this setup you can build a fullstack application with backend, frontend and mobile sharing 99% of the code, with full support for SSR and file structure navigation on nextjs, and full support for react native navigation on expo.
 
 ## ？Why
