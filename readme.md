@@ -29,7 +29,7 @@ I created this project for a personal need, I wanted something like the create-t
   - `next`
 
 - `packages/` shared packages across apps
-  - `app/` you'll be importing most files from `app/`
+  - `app/` this is your main application that's used in both `expo` and `next` apps
     - `features/` screens of your app, organized by domains/feature
     - `provider/` (all the providers that wrap the app, and some no-ops for Web.)
     - `navigation/`
