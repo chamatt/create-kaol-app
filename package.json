@@ -38,7 +38,7 @@
     "db:dev": "yarn db:up && yarn db:migrate:dev",
     "db:up": "docker compose up -d",
     "db:nuke": "docker compose down --volumes --remove-orphans",
-    "db:reset": "yarn db-nuke && yarn db-up && yarn db-migrate-dev",
+    "db:reset": "yarn db:nuke && yarn db:dev",
     "db:migrate:dev": "yarn prisma migrate dev",
     "db:update": "yarn prisma db push && yarn prisma generate",
     "db:seed": "yarn prisma db seed",
@@ -56,5 +56,6 @@
   },
   "modulePathIgnorePatterns": [
     "<rootDir>[/\\\\](build|docs|node_modules|deploy|scripts|.vercel|output)[/\\\\]"
-  ]
+  ],
+  "type": "module"
 }

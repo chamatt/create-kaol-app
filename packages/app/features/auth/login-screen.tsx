@@ -78,14 +78,16 @@ export function LoginScreen() {
         </Card>
       </View>
 
-      <View className="p-4 items-center">
-        <Text>Use a seeded account or create one</Text>
+      {process?.env?.NODE_ENV === 'development' && (
+        <View className="p-4 items-center">
+          <Text>Use a seeded account or create one</Text>
 
-        <View className="flex mt-2 text-center">
-          <Text className="text-center">example@kaol.com / example</Text>
-          <Text className="text-center">admin@kaol.com / admin</Text>
+          <View className="flex mt-2 text-center">
+            <Text className="text-center">example@kaol.com / 123456789</Text>
+            <Text className="text-center">admin@kaol.com / 123456789</Text>
+          </View>
         </View>
-      </View>
+      )}
     </ScrollView>
   )
 }
