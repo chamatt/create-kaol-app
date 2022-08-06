@@ -78,7 +78,7 @@ export function LoginScreen() {
         </Card>
       </View>
 
-      {process?.env?.NODE_ENV === 'development' && (
+      {process.env.NODE_ENV === 'development' && (
         <View className="p-4 items-center">
           <Text>Use a seeded account or create one</Text>
 
