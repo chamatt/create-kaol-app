@@ -159,3 +159,4 @@ This setup is heavily inspired on a few projects:
 - [create-t3-app](https://github.com/t3-oss/create-t3-app)
 - [create-solito-app](https://github.com/nandorojo/solito/tree/master/example-monorepos/blank)
 - [zART-Stack](https://github.com/trpc/zart)
+- [TENTS Stack](https://github.com/juliusmarminge/turbo-expo-next-starter)
