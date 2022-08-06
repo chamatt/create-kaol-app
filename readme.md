@@ -119,7 +119,7 @@ With that connection string, you will have two environment variabled you need.
 
 First one is the `MIGRATION_DB_URL`, this will be the connection string you copied above. This will be used during deployment to migrate the db to the latest migration.
 
-First one is the `DATABASE_URL`, it will be the same connection string you copied above, but with `?pgbouncer=true&schema=public&connection_limit=1` appended at the end.
+Second one is the `DATABASE_URL`, it will be the same connection string you copied above, but with `?pgbouncer=true&schema=public&connection_limit=1` appended at the end.
 This is what the app will use, and it's has connection pool enabled, which is a requirement for serverless environments
 
 ## Setup environment variables in vercel
