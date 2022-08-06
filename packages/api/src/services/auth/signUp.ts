@@ -1,4 +1,3 @@
-import * as trpc from '@trpc/server'
 import bcrypt from 'bcrypt'
 import { TRPCError } from '@trpc/server'
 import { prismaClient } from 'db'
