@@ -6,7 +6,7 @@ import {
 } from 'app/provider/AuthProvider'
 import { Button } from 'app/components/Button'
 import { Text, View } from 'universal'
-import { NavigationPaths } from 'app/navigation/routePaths'
+import { routes } from 'app/navigation/routePaths'
 import { tw } from 'universal/tailwind'
 
 export function HomeScreen() {
@@ -34,7 +34,7 @@ export function HomeScreen() {
 
       <UnauthenticatedOnly>
         <TextLink
-          href={NavigationPaths.login.getPath()}
+          href={routes.login.getPath()}
           textProps={{
             style: tw`text-md font-bold text-blue-700 mb-2`,
           }}
@@ -45,7 +45,7 @@ export function HomeScreen() {
       <AuthenticatedOnly>
         <>
           <TextLink
-            href={NavigationPaths.postList.getPath()}
+            href={routes.postList.getPath()}
             textProps={{
               style: tw`text-md font-bold text-blue-700 mb-6`,
             }}

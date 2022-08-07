@@ -1,7 +1,7 @@
 import { MainStack } from './main-stack'
-import { RouteNames } from '../routePaths'
+import { routes } from '../routePaths'
 
-export const INITIAL_ROUTE = RouteNames.home
+export const INITIAL_ROUTE = routes.home.name
 
 export const NativeNavigation = () => {
   return <MainStack />

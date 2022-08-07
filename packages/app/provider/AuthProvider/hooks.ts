@@ -5,7 +5,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useQueryClient } from 'react-query'
 import { useRouter } from 'solito/router'
 import { AuthInterface } from './types'
-import { NavigationPaths } from 'app/navigation/routePaths'
+import { routes } from 'app/navigation/routePaths'
 
 export const useDecodedToken = (sessionToken?: string) => {
   const decodedToken = useMemo(() => {
@@ -36,7 +36,7 @@ const useAuthenticate = (setSessionToken: (token: string) => void) => {
     async (token: string) => {
       await SafeStorage.set('sessionToken', token)
       setSessionToken(token)
-      router.push(NavigationPaths.home.getPath())
+      router.push(routes.home.getPath())
     },
     [setSessionToken, router]
   )
@@ -85,7 +85,7 @@ export const useLogout = (setSessionToken: (token: string) => void) => {
     await SafeStorage.remove('sessionToken')
     setSessionToken('')
     queryClient.resetQueries(['auth.me'])
-    router.push(NavigationPaths.home.getPath())
+    router.push(routes.home.getPath())
   }, [setSessionToken, queryClient, router])
   return logout
 }

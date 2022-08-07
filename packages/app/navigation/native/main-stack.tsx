@@ -5,49 +5,46 @@ import { PostDetailScreen } from 'app/features/post/details-screen'
 import { PostListScreen } from 'app/features/post/list-screen'
 
 import { HomeScreen } from '../../features/home/home-screen'
-import { NavigationTypes, RouteNames } from '../routePaths'
+import { routes, RouteTypes } from '../routePaths'
 
 const Stack =
   createNativeStackNavigator<
-    Pick<
-      NavigationTypes,
-      'home' | 'login' | 'postDetail' | 'postList' | 'signUp'
-    >
+    Pick<RouteTypes, 'home' | 'login' | 'postDetail' | 'postList' | 'signUp'>
   >()
 
 export function MainStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name={RouteNames.home}
+        name={routes.home.name}
         component={HomeScreen}
         options={{
           title: 'Home',
         }}
       />
       <Stack.Screen
-        name={RouteNames.postList}
+        name={routes.postList.name}
         component={PostListScreen}
         options={{
           title: 'Post',
         }}
       />
       <Stack.Screen
-        name={RouteNames.postDetail}
+        name={routes.postDetail.name}
         component={PostDetailScreen}
         options={{
           title: 'Post',
         }}
       />
       <Stack.Screen
-        name={RouteNames.login}
+        name={routes.login.name}
         component={LoginScreen}
         options={{
           title: 'Login',
         }}
       />
       <Stack.Screen
-        name={RouteNames.signUp}
+        name={routes.signUp.name}
         component={RegisterScreen}
         options={{
           title: 'Signup',

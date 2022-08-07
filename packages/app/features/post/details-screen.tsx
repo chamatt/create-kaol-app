@@ -3,9 +3,9 @@ import { createParam } from 'solito'
 import { styled, tw } from 'universal/tailwind'
 import { Text, View } from 'universal'
 import { GoBack } from 'app/components/GoBack'
-import { NavigationTypes } from 'app/navigation/routePaths'
+import { RouteTypes } from 'app/navigation/routePaths'
 
-const { useParam } = createParam<NavigationTypes['postDetail']>()
+const { useParam } = createParam<RouteTypes['postDetail']>()
 
 // If you wrap a component in `styled`, you can pass the tailwind classes
 // directly through the `className` prop.

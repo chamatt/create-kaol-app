@@ -1,16 +1,18 @@
-import { MapKeysToConstants, NavigationPathShape } from './types'
+import { RouteShape } from './types'
+import { createRoutes } from './utils'
 
 // Define the params of EVERY route in the app
-export type NavigationTypes = {
+export type RouteTypes = {
   home: undefined
   postDetail: { id: string }
   postList: undefined
   login: undefined
   signUp: undefined
 }
-// Define the mapping between screen and URL
-// PS: The getPath params are fully typed
-export const NavigationPaths: NavigationPathShape = {
+
+// Then define the mapping between screen and URL
+// PS: The getPath params are fully typed according to the NavigationTypes
+export const routes = createRoutes({
   home: {
     route: '',
     getPath: () => '/',
@@ -31,12 +33,4 @@ export const NavigationPaths: NavigationPathShape = {
     route: '/auth/signup',
     getPath: () => '/auth/signup',
   },
-}
-
-export const RouteNames = Object.keys(NavigationPaths).reduce(
-  (acc, key) => ({
-    ...acc,
-    [key]: key,
-  }),
-  {} as MapKeysToConstants<typeof NavigationPaths>
-)
+})

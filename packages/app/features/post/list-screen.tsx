@@ -3,7 +3,7 @@ import { View, Text } from 'universal'
 import { TextLink } from 'solito/link'
 import { MotiLink } from 'solito/moti'
 import { styled, tw } from 'universal/tailwind'
-import { NavigationPaths } from 'app/navigation/routePaths'
+import { routes } from 'app/navigation/routePaths'
 import { Button } from 'app/components/Button'
 import { GoBack } from 'app/components/GoBack'
 
@@ -17,7 +17,7 @@ export function PostListScreen() {
       {posts?.map((post) => (
         <Card key={post.id}>
           <TextLink
-            href={NavigationPaths.postDetail.getPath({ id: post.id })}
+            href={routes.postDetail.getPath({ id: post.id })}
             textProps={{
               style: tw`text-md font-bold text-blue-700 mb-2`,
             }}
@@ -25,7 +25,7 @@ export function PostListScreen() {
             Regular Link: {post.title}
           </TextLink>
           <MotiLink
-            href={NavigationPaths.postDetail.getPath({ id: post.id })}
+            href={routes.postDetail.getPath({ id: post.id })}
             animate={({ hovered, pressed }) => {
               'worklet'
 

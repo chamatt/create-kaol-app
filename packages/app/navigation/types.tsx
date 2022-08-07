@@ -1,14 +1,18 @@
-import { NavigationTypes } from './routePaths'
+import { RouteTypes } from './routePaths'
 
-export type NavigationPathShape = {
-  [K in keyof NavigationTypes]: {
+export type RouteShape = {
+  [K in keyof RouteTypes]: {
     route: string
-    getPath: NavigationTypes[K] extends undefined
+    getPath: RouteTypes[K] extends undefined
       ? () => string
-      : (args: NavigationTypes[K]) => string
+      : (args: RouteTypes[K]) => string
   }
 }
 
 export type MapKeysToConstants<T> = {
   [K in keyof T]: K
+}
+
+export type AddKeyNameAsValueInObjectKeys<T> = {
+  [K in keyof T]: T[K] & { name: K }
 }

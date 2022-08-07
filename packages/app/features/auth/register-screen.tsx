@@ -6,7 +6,7 @@ import { useRouter } from 'solito/router'
 import { Text, View } from 'universal'
 import { colors, styled, tw } from 'universal/tailwind'
 import { ScrollView, TextInput } from 'react-native'
-import { NavigationPaths } from 'app/navigation/routePaths'
+import { routes } from 'app/navigation/routePaths'
 
 const Card = styled(View, 'bg-white shadow-sm mb-4 p-6 border max-w-lg w-full')
 
@@ -16,7 +16,7 @@ export function RegisterScreen() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      router.replace(NavigationPaths.home.getPath())
+      router.replace(routes.home.getPath())
     }
   }, [router, isAuthenticated])
 
@@ -67,7 +67,7 @@ export function RegisterScreen() {
 
           <View tw="mt-4 items-center">
             <TextLink
-              href={NavigationPaths.login.getPath()}
+              href={routes.login.getPath()}
               textProps={{
                 style: tw`text-blue-800`,
               }}
