@@ -1,5 +1,7 @@
 # Kaol Stack
 
+![untitled-project@2x (1)](https://user-images.githubusercontent.com/20344348/183339921-9f65834f-4d8d-4446-b180-38a74691f82e.png)
+
 ## 🔦 About
 
 A monorepo with Prisma, Next.js, Expo, tRPC, Authentication and Solito setup and configured to work together.
