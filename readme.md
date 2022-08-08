@@ -37,8 +37,8 @@ I created this project for a personal need, I wanted something like the create-t
         - `index.tsx` Entrypoint for react-navigation
       - `routePaths.tsx` - `!! IMPORTANT !!` Here you setup the route mapping between react-navigation routes and the URLs that they map to in your NextJS app.
   - `api/` your trpc api with your routes
-  - `db/` your prisma db with a pre-populated sqlite file
-     - `seeds/` Seeds for pre-populating te postgres database
+  - `db/` prisma db with some example models
+     - `seeds/` Seeds for pre-populating the postgres database in development
   - `config/` your environment configs
   - `universal/` a place to put your universal components.
     - `universal/tailwind` exports some tailwind utilities that you will use to make components support tailwind className/tw prop.
