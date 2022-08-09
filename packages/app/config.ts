@@ -1,5 +1,5 @@
 import Constants from 'expo-constants'
-import { getCurrentChannel } from './utils/configUtils'
+import { channel, releaseChannel } from 'expo-updates'
 
 export const allowedChannels = <const>[
   'development',
@@ -26,8 +26,29 @@ const enviromentConfigs: { [key in UpdateChannel]: IConfig } = {
     apiUrl: 'https://staging-kaol.vercel.app/api/trpc',
   },
   production: {
-    apiUrl: 'https://kaol.vercel.app/api/trpc/',
+    apiUrl: 'https://kaol.vercel.app/api/trpc',
   },
+}
+
+export const getCurrentChannel = (): UpdateChannel => {
+  console.info('CURRENT CHANNEL: ', channel)
+
+  const inAllowedChannels = (selectedChannel: string) =>
+    (allowedChannels as ReadonlyArray<string>).includes(selectedChannel)
+
+  if (releaseChannel !== 'default') {
+    if (inAllowedChannels(releaseChannel)) {
+      return releaseChannel as UpdateChannel
+    } else return 'development'
+  }
+
+  if (channel) {
+    if (inAllowedChannels(channel)) {
+      return channel as UpdateChannel
+    } else return 'development'
+  }
+
+  return 'development' as UpdateChannel
 }
 
 const Config = enviromentConfigs[getCurrentChannel()]

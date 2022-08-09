@@ -1,3 +1,5 @@
+import { EnvironmentStatusBar } from 'app/components/EnvironmentStatusBar'
+import { Text, View } from 'universal'
 import { APIProvider } from './APIProvider'
 import { AuthProvider } from './AuthProvider'
 import { NavigationProvider } from './NavigationContainer/NavigationContainer'
@@ -14,10 +16,12 @@ export function Provider({
   sessionTokenServer?: string
 }) {
   return (
-    <APIProvider>
-      <AuthProvider initialToken={sessionTokenServer}>
-        <NavigationProvider>{children}</NavigationProvider>
-      </AuthProvider>
-    </APIProvider>
+    <>
+      <APIProvider>
+        <AuthProvider initialToken={sessionTokenServer}>
+          <NavigationProvider>{children}</NavigationProvider>
+        </AuthProvider>
+      </APIProvider>
+    </>
   )
 }
