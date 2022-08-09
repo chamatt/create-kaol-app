@@ -7,7 +7,10 @@
     "scheme": "kaol-expo",
     "platforms": ["ios", "android"],
     "ios": {
-      "bundleIdentifier": "com.chamatt.kaol"
+      "bundleIdentifier": "dev.chamatt.kaol"
+    },
+    "android": {
+      "package": "dev.chamatt.kaol"
     }
   }
 }

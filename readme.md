@@ -178,9 +178,18 @@ You should use EAS or Expo Build to build your app and deploy to the stores.
 
 One thing to keep in mind when you are building is that you need to define the release channel as one of the ones defined above (`development | preview | staging | production`), or update the type definition for extra release channels you may want to use.
 
+!! Attention:
+Run everything inside `apps/expo`
+
 ## With Expo Classic Builds
 
 ### Build the app
+
+```python
+expo prebuild
+cd ios
+pod install    # Or `arch -x86_64 pod install for mac m1 users`
+```
 
 ```python
 expo build:ios --release-channel <your-channel>
