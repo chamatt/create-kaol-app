@@ -10,15 +10,16 @@
     "@trpc/react": "^9.15.0",
     "@trpc/server": "^9.15.0",
     "api": "*",
-    "lib": "*",
+    "dripsy": "^3.6.0",
     "expo-linking": "^3.0.0",
+    "expo-updates": "^0.14.3",
     "jwt-decode": "^3.1.2",
+    "lib": "*",
     "moti": "canary",
     "react-query": "^3.34.7",
     "solito": "latest",
-    "universal": "*",
-    "dripsy": "^3.6.0",
-    "twrnc": "^3.3.3"
+    "twrnc": "^3.3.3",
+    "universal": "*"
   },
   "sideEffects": false
 }
