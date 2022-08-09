@@ -40,7 +40,7 @@ I created this project for a personal need, I wanted something like the create-t
       - `routePaths.tsx` - `!! IMPORTANT !!` Here you setup the route mapping between react-navigation routes and the URLs that they map to in your NextJS app.
   - `api/` your trpc api with your routes
   - `db/` prisma db with some example models
-     - `seeds/` Seeds for pre-populating the postgres database in development
+    - `seeds/` Seeds for pre-populating the postgres database in development
   - `config/` your environment configs
   - `universal/` a place to put your universal components.
     - `universal/tailwind` exports some tailwind utilities that you will use to make components support tailwind className/tw prop.
@@ -149,6 +149,100 @@ After changing the environement variables, you will need to redeploy the app. To
 ```
 git commit --alow-empty -m "redeploy"
 git push origin master
+```
+
+# Expo
+
+## Expo Configuration
+
+When you're ready for staging and production build, you'll need to configure your environment variabled that your Expo app will use. To do that, you can head to `packages/app/config.ts`, and update the apiUrl for production (and staging, if applicable):
+
+```ts
+const enviromentConfigs: { [key in UpdateChannel]: IConfig } = {
+  development: {
+    // Don't touch this
+    apiUrl: `http://${localhost}:4000/api/trpc`,
+  },
+  staging: {
+    // Update this to your api url in staging
+    apiUrl: 'https://staging-kaol.vercel.app/api/trpc',
+  },
+  production: {
+    // Update this to your api url in production
+    apiUrl: 'https://kaol.vercel.app/api/trpc',
+  },
+}
+```
+
+You should use EAS or Expo Build to build your app and deploy to the stores.
+
+One thing to keep in mind when you are building is that you need to define the release channel as one of the ones defined above (`development | preview | staging | production`), or update the type definition for extra release channels you may want to use.
+
+## With Expo Classic Builds
+
+### Build the app
+
+```python
+expo build:ios --release-channel <your-channel>
+expo build:android --release-channel <your-channel>
+```
+
+### Publish the app to Expo Go
+
+```
+expo publish --release-channel <your-channel>
+```
+
+After this is done, you can preview the app in Expo Go via:
+
+```
+exp://exp.host/@<your-user>/<your-app>?release-channel=<your-channel>
+```
+
+You can see all your release channels by simply opneing the Expo Go app, you don't need to create the url above.
+
+### Publish app to app store
+
+[Publishing Expo Classic Builds with EAS](https://docs.expo.dev/submit/classic-builds/)
+
+## With Expo new EAS CLI
+
+EAS CLI is the new default for expo builds. It has a severe disavantage in the fact that you can't publish to expo go for free anymore, so I'd just use expo classic build while possible (but it will be discontinued in the next SDK)
+
+### Install the EAS cli
+
+```
+npm install -g eas-cli
+```
+
+### Login to your expo account
+
+```
+eas login
+```
+
+## Build the app
+
+You can build the app for each release channel by running:
+
+```python
+# Building for development (debug)
+eas build --profile development
+
+# Building for development (non-debug)
+eas build --profile preview
+
+# Building for staging environment
+eas build --profile staging
+
+# Building for production environment
+eas build --profile production
+```
+
+To publish your production app to the store:
+
+```python
+eas submit --profile production
 ```
 
 ## Done
