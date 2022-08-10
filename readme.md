@@ -42,7 +42,7 @@ I created this project for a personal need, I wanted something like the create-t
   - `db/` prisma db with some example models
     - `seeds/` Seeds for pre-populating the postgres database in development
   - `config/` your environment configs
-  - `universal/` a place to put your universal components.
+  - `universal/` a place to put your universal components / design system.
     - `universal/tailwind` exports some tailwind utilities that you will use to make components support tailwind className/tw prop.
 
 You can add other folders inside of `packages/` if you know what you're doing and have a good reason to.
