@@ -73,7 +73,7 @@ export function RegisterScreen() {
                 style: tw`text-blue-800 text-base`,
               }}
             >
-              Already have an account? Sign up here.
+              Already have an account? Log in here.
             </TextLink>
           </View>
 
