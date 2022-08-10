@@ -57,6 +57,7 @@ export function LoginScreen() {
               className="w-32 text-center"
               textStyle={tw`text-center flex justify-center items-center`}
               disabled={signInLoading}
+              isLoading={signInLoading}
               onPress={() => {
                 signIn({ email, password })
               }}
@@ -69,7 +70,7 @@ export function LoginScreen() {
             <TextLink
               href={routes.signUp.getPath()}
               textProps={{
-                style: tw`text-blue-800`,
+                style: tw`text-blue-800 text-base`,
               }}
             >
               Don&apos;t have an account? Sign up here.

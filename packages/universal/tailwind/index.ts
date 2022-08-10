@@ -1,3 +1,3 @@
 export * from './tailwind'
 export * from './types'
-export * from './colors'
+export * from './helpers/colors'

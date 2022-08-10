@@ -57,6 +57,7 @@ export function RegisterScreen() {
               className="w-32 text-center"
               textStyle={tw`text-center flex justify-center items-center`}
               disabled={signUpLoading}
+              isLoading={signUpLoading}
               onPress={() => {
                 signUp({ email, password })
               }}
@@ -69,7 +70,7 @@ export function RegisterScreen() {
             <TextLink
               href={routes.login.getPath()}
               textProps={{
-                style: tw`text-blue-800`,
+                style: tw`text-blue-800 text-base`,
               }}
             >
               Already have an account? Sign up here.

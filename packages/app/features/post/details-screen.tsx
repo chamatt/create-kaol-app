@@ -10,7 +10,7 @@ const { useParam } = createParam<RouteTypes['postDetail']>()
 // If you wrap a component in `styled`, you can pass the tailwind classes
 // directly through the `className` prop.
 // Otherwise, you pass it via the `style` prop, with the `tw` function.
-const TextStyled = styled(Text, 'mb-4')
+const TextStyled = styled(Text, 'mb-4 text-center')
 
 export function PostDetailScreen() {
   const [id] = useParam('id')
@@ -21,16 +21,14 @@ export function PostDetailScreen() {
 
   if (isLoading)
     return (
-      <View className="flex justify-center items-center">
+      <View className="flex justify-center">
         <TextStyled className="text-center font-bold">Loading...</TextStyled>
       </View>
     )
 
   return (
     <View className="flex-1 justify-center items-center p-4">
-      <TextStyled className="text-center font-bold text-red-500">
-        {data?.title}
-      </TextStyled>
+      <TextStyled className="font-bold text-red-500">{data?.title}</TextStyled>
       <TextStyled className="mb-4">{data?.content}</TextStyled>
       <TextStyled className="text-gray-600">
         By: {data?.author?.email}

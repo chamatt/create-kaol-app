@@ -19,7 +19,7 @@ export function PostListScreen() {
           <TextLink
             href={routes.postDetail.getPath({ id: post.id })}
             textProps={{
-              style: tw`text-md font-bold text-blue-700 mb-2`,
+              style: tw`text-base font-bold text-blue-700 mb-2`,
             }}
           >
             Regular Link: {post.title}
@@ -38,7 +38,7 @@ export function PostListScreen() {
               duration: 150,
             }}
           >
-            <Text selectable={false} tw="text-md text-black font-bold">
+            <Text selectable={false} tw="text-base text-black font-bold">
               Moti Link: {post.title}
             </Text>
           </MotiLink>

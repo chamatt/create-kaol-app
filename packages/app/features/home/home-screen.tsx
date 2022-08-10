@@ -11,7 +11,7 @@ import { tw } from 'universal/tailwind'
 import { EnvironmentStatusBar } from 'app/components/EnvironmentStatusBar'
 
 export function HomeScreen() {
-  const { user, logout, isAuthenticated } = useAuth()
+  const { user, logout } = useAuth()
 
   return (
     <View className="flex-1">
@@ -40,7 +40,7 @@ export function HomeScreen() {
           <TextLink
             href={routes.login.getPath()}
             textProps={{
-              style: tw`text-md font-bold text-blue-700 mb-2`,
+              style: tw`text-base font-bold text-blue-700 mb-2`,
             }}
           >
             Login
@@ -51,7 +51,7 @@ export function HomeScreen() {
             <TextLink
               href={routes.postList.getPath()}
               textProps={{
-                style: tw`text-md font-bold text-blue-700 mb-6`,
+                style: tw`text-base font-bold text-blue-700 mb-6`,
               }}
             >
               Go to blog posts
