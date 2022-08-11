@@ -7,6 +7,12 @@
 A monorepo with Prisma, Next.js, Expo, tRPC, Authentication and Solito setup and configured to work together.
 With this setup you can build a fullstack application with backend, frontend and mobile sharing 99% of the code, with full support for SSR and file structure navigation on nextjs, and full support for react native navigation on expo.
 
+## Use this template
+
+To create a repo based on this template:
+
+[<img width="200" alt="use this template" src="https://user-images.githubusercontent.com/20344348/184046297-86ffe09b-eb8d-46ed-a17a-eb69be815a2a.png">](https://github.com/chamatt/create-kaol-app/generate)
+
 ## ？Why
 
 I created this project for a personal need, I wanted something like the create-t3-app, but sharing code between the mobile app and the nextjs app. I could not get any of the available repos on github to work the way I wanted, so I decided to try and put a few of them together and after a few days of banging my head against the wall I finally managed to do it in a good way. There are still a few things I want to do, but it's currently the best universal app monorepo template amongst what I could find.
