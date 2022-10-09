@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "DATABASE_URL=$MIGRATE_DB_URL prisma generate && DATABASE_URL=$MIGRATE_DB_URL prisma migrate deploy && next build"
+    "vercel-build": "DATABASE_URL=$DATABASE_URL prisma generate && DATABASE_URL=$DATABASE_URL prisma migrate deploy && next build"
   },
   "dependencies": {
     "@expo/next-adapter": "^3.1.20",
