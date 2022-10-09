@@ -1,6 +1,6 @@
 import { trpc } from 'app/utils/trpc'
 import { useState } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import SafeStorage from 'lib/safe-storage'
 import Config from 'app/config'
 

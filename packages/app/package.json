@@ -5,10 +5,10 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
-    "@trpc/client": "^9.15.0",
-    "@trpc/next": "^9.15.0",
-    "@trpc/react": "^9.15.0",
-    "@trpc/server": "^9.15.0",
+    "@trpc/client": "10.0.0-proxy-beta.17",
+    "@trpc/next": "10.0.0-proxy-beta.17",
+    "@trpc/react": "10.0.0-proxy-beta.17",
+    "@trpc/server": "10.0.0-proxy-beta.17",
     "api": "*",
     "dripsy": "^3.6.0",
     "expo-linking": "^3.0.0",
@@ -16,7 +16,7 @@
     "jwt-decode": "^3.1.2",
     "lib": "*",
     "moti": "canary",
-    "react-query": "^3.34.7",
+    "@tanstack/react-query": "^4.10.3",
     "solito": "latest",
     "twrnc": "^3.3.3",
     "universal": "*"
