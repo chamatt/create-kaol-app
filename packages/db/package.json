@@ -8,8 +8,8 @@
     "dev": "prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "^3.14.0",
-    "prisma": "^3.14.0"
+    "@prisma/client": "^4.4.0",
+    "prisma": "^4.4.0"
   },
   "devDependencies": {
     "@faker-js/faker": "^7.3.0"
