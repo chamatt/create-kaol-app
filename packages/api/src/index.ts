@@ -1,12 +1,11 @@
 import { createRouter } from './routers/context'
 import { authRouter } from './routers/auth'
 import { postRouter } from './routers/post'
+import { t } from './trpc'
 
-const legacyRouter = createRouter()
-  .merge('auth.', authRouter)
-  .merge('post.', postRouter)
-  .interop()
-
-export const appRouter = legacyRouter
+export const appRouter = t.router({
+  auth: authRouter,
+  post: postRouter,
+})
 
 export type AppRouter = typeof appRouter

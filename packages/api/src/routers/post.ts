@@ -1,21 +1,24 @@
-import { createRouter, protectedRoute } from './context'
 import { z } from 'zod'
+import { protectedProcedure } from './context'
+import { t } from '.././trpc'
 
-export const postRouter = protectedRoute
-  .query('get-all', {
-    async resolve({ ctx }) {
-      return await ctx.prisma.post.findMany({
-        include: {
-          author: true,
-        },
+export const postRouter = t.router({
+  'get-all': protectedProcedure.query(async (req) => {
+    const { ctx } = req
+    return await ctx.prisma.post.findMany({
+      include: {
+        author: true,
+      },
+    })
+  }),
+  'get-by-id': protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
       })
-    },
-  })
-  .query('get-by-id', {
-    input: z.object({
-      id: z.string().uuid(),
-    }),
-    async resolve({ input, ctx }) {
+    )
+    .query(async (req) => {
+      const { ctx, input } = req
       return await ctx.prisma.post.findFirst({
         where: {
           id: input.id,
@@ -27,15 +30,17 @@ export const postRouter = protectedRoute
           title: 'asc',
         },
       })
-    },
-  })
-  .mutation('create', {
-    input: z.object({
-      authorId: z.string(),
-      title: z.string(),
-      content: z.string(),
     }),
-    async resolve({ input, ctx }) {
+  create: protectedProcedure
+    .input(
+      z.object({
+        authorId: z.string(),
+        title: z.string(),
+        content: z.string(),
+      })
+    )
+    .mutation(async (req) => {
+      const { input, ctx } = req
       return await ctx.prisma.post.create({
         data: {
           authorId: input.authorId,
@@ -43,17 +48,19 @@ export const postRouter = protectedRoute
           content: input.content,
         },
       })
-    },
-  })
-  .mutation('delete', {
-    input: z.object({
-      id: z.string().uuid(),
     }),
-    async resolve({ input, ctx }) {
+  delete: protectedProcedure
+    .input(
+      z.object({
+        id: z.string().uuid(),
+      })
+    )
+    .mutation(async (req) => {
+      const { input, ctx } = req
       return await ctx.prisma.post.delete({
         where: {
           id: input.id,
         },
       })
-    },
-  })
+    }),
+})

@@ -1,5 +1,5 @@
-import type { AppRouter } from 'api/src/index'
-import { createReactQueryHooks } from '@trpc/react'
+import { AppRouter } from 'api/src'
+import { createTRPCReact } from '@trpc/react'
 
-export const trpc = createReactQueryHooks<AppRouter>()
+export const trpc = createTRPCReact<AppRouter>()
 export * from 'api/src/inferance-helpers'

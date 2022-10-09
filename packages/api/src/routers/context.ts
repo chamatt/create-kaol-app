@@ -5,6 +5,7 @@ import crypto from 'crypto'
 import { getUserFromHeader } from '../utils/auth'
 import { User } from '.prisma/client'
 import { prismaClient } from 'db'
+import { t } from '../trpc'
 
 const ADMIN_ROLES = ['ADMIN', 'SUPERADMIN']
 
@@ -30,23 +31,23 @@ export const createContext = async ({
     prisma: prismaClient,
   }
 }
-
-export const protectedRoute = createRouter().middleware(
-  async ({ ctx, next }) => {
-    const user = await getUserFromHeader(ctx.headers)
-    if (!user) {
-      throw new TRPCError({
-        message: `Unauthenticated when trying to access ${ctx.req.url}`,
-        code: 'UNAUTHORIZED',
-      })
-    }
-    ctx.user = user
-    ctx.isAdmin = isAdmin(user.role)
-    return next()
+export const protectedRoute = t.middleware(async (req) => {
+  const { ctx, next } = req
+  const user = await getUserFromHeader(ctx.headers)
+  if (!user) {
+    throw new TRPCError({
+      message: `Unauthenticated when trying to access ${ctx.req.url}`,
+      code: 'UNAUTHORIZED',
+    })
   }
-)
+  ctx.user = user
+  ctx.isAdmin = isAdmin(user.role)
+  return next()
+})
 
-export const adminRoute = createRouter().middleware(async ({ ctx, next }) => {
+export const protectedProcedure = t.procedure.use(protectedRoute)
+
+export const adminRoute = t.middleware(async ({ ctx, next }) => {
   const user = await getUserFromHeader(ctx.headers)
 
   if (!user) {
