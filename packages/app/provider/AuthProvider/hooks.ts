@@ -45,7 +45,7 @@ const useAuthenticate = (setSessionToken: (token: string) => void) => {
 
 export const useSignIn = (setSessionToken: (token: string) => void) => {
   const authenticate = useAuthenticate(setSessionToken)
-  const loginMutation = trpc.useMutation('auth.signIn', {
+  const loginMutation = trpc.auth.signIn.useMutation({
     onSuccess: (data) => {
       authenticate(data.token)
     },
@@ -59,7 +59,7 @@ export const useSignIn = (setSessionToken: (token: string) => void) => {
 
 export const useSignUp = (setSessionToken: (token: string) => void) => {
   const authenticate = useAuthenticate(setSessionToken)
-  const signupMutation = trpc.useMutation('auth.signUp', {
+  const signupMutation = trpc.auth.signUp.useMutation({
     onSuccess: (data) => {
       authenticate(data.token)
     },
@@ -72,10 +72,11 @@ export const useSignUp = (setSessionToken: (token: string) => void) => {
 }
 
 export const useGetMe = (sessionToken: string) => {
-  return trpc.useQuery(['auth.me'], {
-    enabled: !!sessionToken,
-    retry: false,
-  })
+    return trpc.auth.me.useQuery(undefined, {
+        enabled: !!sessionToken,
+        retry: false,
+        trpc: {}
+    })
 }
 
 export const useLogout = (setSessionToken: (token: string) => void) => {

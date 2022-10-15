@@ -3,7 +3,7 @@ import { protectedProcedure } from './context'
 import { t } from '.././trpc'
 
 export const postRouter = t.router({
-  'get-all': protectedProcedure.query(async (req) => {
+  getAll: protectedProcedure.query(async (req) => {
     const { ctx } = req
     return await ctx.prisma.post.findMany({
       include: {
@@ -11,7 +11,7 @@ export const postRouter = t.router({
       },
     })
   }),
-  'get-by-id': protectedProcedure
+  getById: protectedProcedure
     .input(
       z.object({
         id: z.string().uuid(),

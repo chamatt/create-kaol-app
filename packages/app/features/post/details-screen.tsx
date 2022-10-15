@@ -16,9 +16,10 @@ export function PostDetailScreen() {
   const [id] = useParam('id')
 
   //TODO: confirm this
-  const { data, isLoading } = trpc.useQuery(['post.get-by-id', { id: id! }], {
-    enabled: !!id,
-  })
+    const { data, isLoading } = trpc.post.getById.useQuery({ id: id! }, {
+        enabled: !!id,
+        trpc: {}
+    })
 
   if (isLoading)
     return (

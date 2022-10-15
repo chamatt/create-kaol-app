@@ -1,4 +1,3 @@
-import { createRouter } from './routers/context'
 import { authRouter } from './routers/auth'
 import { postRouter } from './routers/post'
 import { t } from './trpc'
