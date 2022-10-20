@@ -125,7 +125,7 @@ This monorepo is pre-configured to work with vercel. You will need a postgres da
 
 With that connection string, you will have two environment variabled you need.
 
-First one is the `MIGRATION_DB_URL`, this will be the connection string you copied above. This will be used during deployment to migrate the db to the latest migration.
+First one is the `MIGRATE_DB_URL`, this will be the connection string you copied above. This will be used during deployment to migrate the db to the latest migration.
 
 Second one is the `DATABASE_URL`, it will be the same connection string you copied above, but with `?pgbouncer=true&schema=public&connection_limit=1` appended at the end.
 This is what the app will use, and it's has connection pool enabled, which is a requirement for serverless environments
@@ -137,7 +137,7 @@ This is what the app will use, and it's has connection pool enabled, which is a 
   - Make sure to uncheck `Preview` and `Development`, and leave only `Production`
 
 ```sh
-MIGRATION_DB_URL="postgres://<user>:<password>@<supabase_db_url>:6543/postgres"
+MIGRATE_DB_URL="postgres://<user>:<password>@<supabase_db_url>:6543/postgres"
 
 DATABASE_URL="postgres://<user>:<password>@<supabase_db_url>:6543/<database>?pgbouncer=true&schema=public&connection_limit=1"
 
