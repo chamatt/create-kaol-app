@@ -6,6 +6,7 @@
     "app": "*",
     "config": "*",
     "expo": "^46.0.0",
+    "expo-router": "^0.0.34",
     "expo-secure-store": "~11.3.0",
     "expo-splash-screen": "~0.16.2",
     "expo-status-bar": "~1.4.0",
@@ -33,7 +34,6 @@
     "ios": "expo run:ios",
     "web": "expo start --web"
   },
-  "main": "index.js",
   "version": "1.0.0",
   "private": true,
   "name": "expo-app"
