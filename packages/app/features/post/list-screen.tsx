@@ -10,7 +10,8 @@ import { GoBack } from 'app/components/GoBack'
 const Card = styled(View, 'bg-white shadow-sm mb-4 rounded-lg p-6 border')
 
 export function PostListScreen() {
-  const { data: posts } = trpc.useQuery(['post.get-all'])
+  // TODO: confirm this
+  const { data: posts } = trpc.post.getAll.useQuery()
 
   return (
     <View tw="flex-1 justify-center items-center p-4">

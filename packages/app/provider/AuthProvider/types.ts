@@ -1,8 +1,5 @@
-import {
-  inferMutationInput,
-  inferMutationOutput,
-  inferQueryOutput,
-} from 'api/src/inferance-helpers'
+import { AppRouter } from 'api/src'
+import { inferProcedureInput } from '@trpc/server'
 
 export interface AuthInterface {
   isAuthenticated: boolean
@@ -12,10 +9,10 @@ export interface AuthInterface {
     iat: number
     userId: string
   }
-  user: inferQueryOutput<'auth.me'>
-  signIn: (input: inferMutationInput<'auth.signIn'>) => void
+  user: inferProcedureInput<AppRouter['auth']['me']>
+  signIn: inferProcedureInput<AppRouter['auth']['signIn']>
+  signUp: inferProcedureInput<AppRouter['auth']['signUp']>
   signInLoading: boolean
-  signUp: (input: inferMutationInput<'auth.signUp'>) => void
   signUpLoading: boolean
   logout: () => void
   errorMessage?: string

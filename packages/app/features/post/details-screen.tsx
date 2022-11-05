@@ -15,9 +15,11 @@ const TextStyled = styled(Text, 'mb-4 text-center')
 export function PostDetailScreen() {
   const [id] = useParam('id')
 
-  const { data, isLoading } = trpc.useQuery(['post.get-by-id', { id: id! }], {
-    enabled: !!id,
-  })
+  //TODO: confirm this
+    const { data, isLoading } = trpc.post.getById.useQuery({ id: id! }, {
+        enabled: !!id,
+        trpc: {}
+    })
 
   if (isLoading)
     return (

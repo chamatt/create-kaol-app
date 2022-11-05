@@ -2,7 +2,7 @@ import SafeStorage from 'lib/safe-storage'
 import { trpc } from 'app/utils/trpc'
 import jwtDecode from 'jwt-decode'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { useQueryClient } from 'react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { useRouter } from 'solito/router'
 import { AuthInterface } from './types'
 import { routes } from 'app/navigation/routePaths'
@@ -45,7 +45,7 @@ const useAuthenticate = (setSessionToken: (token: string) => void) => {
 
 export const useSignIn = (setSessionToken: (token: string) => void) => {
   const authenticate = useAuthenticate(setSessionToken)
-  const loginMutation = trpc.useMutation('auth.signIn', {
+  const loginMutation = trpc.auth.signIn.useMutation({
     onSuccess: (data) => {
       authenticate(data.token)
     },
@@ -59,7 +59,7 @@ export const useSignIn = (setSessionToken: (token: string) => void) => {
 
 export const useSignUp = (setSessionToken: (token: string) => void) => {
   const authenticate = useAuthenticate(setSessionToken)
-  const signupMutation = trpc.useMutation('auth.signUp', {
+  const signupMutation = trpc.auth.signUp.useMutation({
     onSuccess: (data) => {
       authenticate(data.token)
     },
@@ -72,10 +72,11 @@ export const useSignUp = (setSessionToken: (token: string) => void) => {
 }
 
 export const useGetMe = (sessionToken: string) => {
-  return trpc.useQuery(['auth.me'], {
-    enabled: !!sessionToken,
-    retry: false,
-  })
+    return trpc.auth.me.useQuery(undefined, {
+        enabled: !!sessionToken,
+        retry: false,
+        trpc: {}
+    })
 }
 
 export const useLogout = (setSessionToken: (token: string) => void) => {

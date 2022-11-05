@@ -1,28 +1,25 @@
 import { createSession } from '../utils/auth'
-import { createRouter, protectedRoute } from './context'
+import { protectedProcedure } from './context'
 import signIn, { SignInSchema } from '../services/auth/signIn'
 import signUp, { SignUpSchema } from '../services/auth/signUp'
 
-export const authRouter = createRouter()
-  .mutation('signIn', {
-    input: SignInSchema,
-    resolve: async ({ input: { email, password } }) => {
-      return signIn({ email, password })
-    },
-  })
-  .mutation('signUp', {
-    input: SignUpSchema,
-    resolve: async ({ input: { email, password } }) => {
-      const user = await signUp({ email, password })
-      const token = await createSession(user)
-      return { token }
-    },
-  })
-  .merge(
-    'me',
-    protectedRoute.query('', {
-      resolve: async ({ ctx }) => {
-        return ctx.user
-      },
-    })
-  )
+import { t } from '.././trpc'
+
+export const authRouter = t.router({
+  signIn: t.procedure.input(SignInSchema).mutation((req) => {
+    const { input } = req
+
+    return signIn({ email: input.email, password: input.password })
+  }),
+  signUp: t.procedure.input(SignUpSchema).mutation(async (req) => {
+    const input = req.input
+
+    const user = await signUp({ email: input.email, password: input.password })
+    const token = await createSession(user)
+    return { token }
+  }),
+  me: protectedProcedure.query(async (req) => {
+    const { ctx } = req
+    return ctx.user
+  }),
+})

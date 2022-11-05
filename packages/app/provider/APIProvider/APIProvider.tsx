@@ -1,21 +1,25 @@
 import { trpc } from 'app/utils/trpc'
 import { useState } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import SafeStorage from 'lib/safe-storage'
 import Config from 'app/config'
+import { httpBatchLink } from '@trpc/client'
 
 const createTrpcClient = () => {
   return trpc.createClient({
-    url: Config.apiUrl,
-    async headers() {
-      const sessionToken = await SafeStorage.get('sessionToken')
-
-      return {
-        authorization: sessionToken ? `Bearer ${sessionToken}` : undefined,
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      }
-    },
+    links: [
+      httpBatchLink({
+        url: Config.apiUrl,
+        async headers() {
+          const sessionToken = SafeStorage.get('sessionToken')
+          return {
+            authorization: sessionToken ? `Bearer ${sessionToken}` : undefined,
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          }
+        },
+      }),
+    ],
   })
 }
 
