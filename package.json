@@ -57,5 +57,8 @@
   "modulePathIgnorePatterns": [
     "<rootDir>[/\\\\](build|docs|node_modules|deploy|scripts|.vercel|output)[/\\\\]"
   ],
-  "type": "module"
+  "type": "module",
+  "resolutions": {
+    "metro": "0.72.3"
+  }
 }
