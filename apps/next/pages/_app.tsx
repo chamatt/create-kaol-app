@@ -1,14 +1,27 @@
+import 'raf/polyfill'
+
+const fixReanimatedIssue = () => {
+  // FIXME remove this once this reanimated fix gets released
+  // https://github.com/software-mansion/react-native-reanimated/issues/3355
+  if (process.browser) {
+    // @ts-ignore
+    window._frameTimestamp = null
+  }
+}
+
+fixReanimatedIssue()
+
+
 import { Provider } from 'app/provider'
 import Head from 'next/head'
 import React from 'react'
-import type { SolitoAppProps } from 'solito'
 import { withTRPC } from '@trpc/next'
 import type { AppRouter } from 'api/src/index'
-import 'raf/polyfill'
 import { getSessionAuth } from '../lib/ssrHelpers'
 import { AppContext } from 'next/app'
+import { AppProps } from 'next/app'
 
-interface MyAppProps extends SolitoAppProps {
+interface MyAppProps extends AppProps {
   pageProps: {
     sessionToken: string
   }

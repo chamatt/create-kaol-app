@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   webpack5: true,
+  experimental: {
+    forceSwcTransforms: true,
+    swcPlugins: [[require.resolve('./plugins/swc_plugin_reanimated.wasm')]],
+  },
 }
 
 const { withExpo } = require('@expo/next-adapter')
@@ -9,8 +13,6 @@ const withPlugins = require('next-compose-plugins')
 const withTM = require('next-transpile-modules')([
   'solito',
   'moti',
-  '@motify/core',
-  '@motify/components',
   'twrnc',
   'js-cookie',
   'app',
@@ -20,7 +22,11 @@ const withTM = require('next-transpile-modules')([
   'universal',
 ])
 
-module.exports = withPlugins(
-  [withTM, [withExpo, { projectRoot: __dirname }]],
-  nextConfig
-)
+const transform =  withPlugins([withTM, [withExpo, { projectRoot: __dirname }]])
+
+module.exports = function (name, { defaultConfig }) {
+  return transform(name, {
+    ...defaultConfig,
+    ...nextConfig
+  })
+}
