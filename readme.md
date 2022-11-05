@@ -2,10 +2,6 @@
 
 ![untitled-project@2x (1)](https://user-images.githubusercontent.com/20344348/183339921-9f65834f-4d8d-4446-b180-38a74691f82e.png)
 
-## ⚠ Warning
-I don't have time to maintain this to add new features and keep all dependencies updated at all times. I'd recommend you go with [create-t3-turbo](https://github.com/t3-oss/create-t3-turbo/) if you want to keep up with the latest releases. 
-create-t3-turbo is a more of blank canvas compared to the batteries-included model of Kaol, but it's actively maintained and will for sure get new things like next-auth support, nextjs 13, expo-router earlier.
-
 ## 🔦 About
 
 A monorepo with Prisma, Next.js, Expo, tRPC, Authentication and Solito setup and configured to work together.
