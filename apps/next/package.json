@@ -12,13 +12,13 @@
     "vercel-build": "DATABASE_URL=$MIGRATE_DB_URL prisma generate && DATABASE_URL=$MIGRATE_DB_URL prisma migrate deploy && next build"
   },
   "dependencies": {
-    "@expo/next-adapter": "^3.1.20",
+    "@expo/next-adapter": "^4.0.12",
     "api": "*",
     "app": "*",
     "config": "*",
     "cookies": "^0.8.0",
     "js-cookie": "^3.0.1",
-    "next": "12.1.0",
+    "next": "12.3.2",
     "raf": "^3.4.1"
   },
   "devDependencies": {

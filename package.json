@@ -10,18 +10,18 @@
   },
   "devDependencies": {
     "@types/node": "^18.6.1",
-    "@types/react": "^17.0.39",
-    "@types/react-native": "^0.67.2",
+    "@types/react": "^18.0.17",
+    "@types/react-native": "^0.69.5",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
-    "eslint": "^8.11.0",
+    "eslint": "^8.21.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.5.1",
+    "prettier": "^2.7.1",
     "ts-node": "^10.9.1",
     "ttab": "^0.7.2",
-    "turbo": "^1.1.6",
+    "turbo": "^1.4.2",
     "typescript": "^4.7.4"
   },
   "scripts": {
