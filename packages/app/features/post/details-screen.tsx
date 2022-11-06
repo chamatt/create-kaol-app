@@ -27,7 +27,7 @@ export function PostDetailScreen() {
     )
 
   return (
-    <View className="flex-1 justify-center items-center p-4">
+    <View className="flex-1 items-center justify-center p-4">
       <TextStyled className="font-bold text-red-500">{data?.title}</TextStyled>
       <TextStyled className="mb-4">{data?.content}</TextStyled>
       <TextStyled className="text-gray-600">

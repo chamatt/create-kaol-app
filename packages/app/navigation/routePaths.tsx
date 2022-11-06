@@ -1,4 +1,3 @@
-import { RouteShape } from './types'
 import { createRoutes } from './utils'
 
 // Define the params of EVERY route in the app
