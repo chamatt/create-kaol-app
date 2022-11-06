@@ -23,10 +23,10 @@ I created this project for a personal need, I wanted something like the create-t
 - `solito` for cross-platform navigation
 - `moti` for animations (basically framer-motion but works in both expo and web)
 - `twrnc` tailwind for react native
-- `Expo` SDK 44
-- `Next.js` 12
+- `Expo` SDK 46
+- `Next.js` 12.3
 - `tRPC` 9
-- `React Navigation` 6
+- `Expo Router beta`
 - `Authentication` with email/password pre-configured
 
 ## 🗂 Folder layout
@@ -34,15 +34,15 @@ I created this project for a personal need, I wanted something like the create-t
 - `apps` entry points for each app
 
   - `expo`
+    - `app` Kaol uses [expo-router](https://expo.github.io/router/docs), so you should should defined your routes for the native app here
   - `next`
+    - `pages` Define the pages for the web
 
 - `packages/` shared packages across apps
   - `app/` this is your main application that's used in both `expo` and `next` apps
     - `features/` screens of your app, organized by domains/feature
     - `provider/` (all the providers that wrap the app, and some no-ops for Web.)
     - `navigation/`
-      - `native/` Next.js has a `pages/` folder. React Native doesn't. This folder contains react-navigation-related code for RN, you should place yours navigations like StackNavigation, BottomNavigation, etc, here.
-        - `index.tsx` Entrypoint for react-navigation
       - `routePaths.tsx` - `!! IMPORTANT !!` Here you setup the route mapping between react-navigation routes and the URLs that they map to in your NextJS app.
   - `api/` your trpc api with your routes
   - `db/` prisma db with some example models
