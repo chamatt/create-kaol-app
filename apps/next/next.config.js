@@ -22,11 +22,11 @@ const withTM = require('next-transpile-modules')([
   'universal',
 ])
 
-const transform =  withPlugins([withTM, [withExpo, { projectRoot: __dirname }]])
+const transform = withPlugins([withTM, [withExpo, { projectRoot: __dirname }]])
 
 module.exports = function (name, { defaultConfig }) {
   return transform(name, {
     ...defaultConfig,
-    ...nextConfig
+    ...nextConfig,
   })
 }
