@@ -20,8 +20,6 @@ const withTM = require('next-transpile-modules')([
   'config',
   'lib',
   'universal',
-  'expo',
-  'react-native'
 ])
 
 const transform = withPlugins([withTM, [withExpo, { projectRoot: __dirname }]])

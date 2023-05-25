@@ -19,7 +19,7 @@ export function HomeScreen() {
 
       <View className="flex-1 justify-center items-center p-4">
         <Text className="font-extrabold text-3xl text-center items-center">
-          Welcome to Kaol. {user?.email}
+          Welcome to Kaaol. {user?.email}
         </Text>
 
         <View className="max-w-base my-8">
