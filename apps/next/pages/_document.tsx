@@ -1,1 +1,2 @@
-export { default } from '@expo/next-adapter/document'
+export { default } from 'next/document'
+//TODO: not sure about this change
