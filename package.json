@@ -58,9 +58,6 @@
     "<rootDir>[/\\\\](build|docs|node_modules|deploy|scripts|.vercel|output)[/\\\\]"
   ],
   "type": "module",
-  "resolutions": {
-    "metro": "0.72.3"
-  },
   "dependencies": {
     "prettier-plugin-tailwindcss": "^0.1.13"
   }

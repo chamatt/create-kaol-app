@@ -31,7 +31,7 @@ const enviromentConfigs: { [key in UpdateChannel]: IConfig } = {
 }
 
 export const getCurrentChannel = (): UpdateChannel => {
-  console.info('CURRENT CHANNEL: ', channel)
+  console.info('CURRENT CHANNEL: ', channel, 2)
 
   const inAllowedChannels = (selectedChannel: string) =>
     (allowedChannels as ReadonlyArray<string>).includes(selectedChannel)
