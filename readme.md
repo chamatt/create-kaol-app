@@ -262,7 +262,7 @@ eas submit --profile production
 
 ## Done
 
-Your are now done, your app should be up and running with authentication working.
+Your are now done, your app should be up and running with authentication working!
 
 # 🎙 Credits
 
